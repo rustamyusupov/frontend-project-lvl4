@@ -1,27 +1,22 @@
 {
-  "name": "frontend_l4_chat_project",
+  "name": "slack",
   "version": "0.0.1",
   "description": "",
+  "author": "Rustam Yusupov",
+  "license": "ISC",
   "main": "server/index.js",
   "engines": {
     "node": ">= 14"
   },
   "scripts": {
-    "test": "jest",
+    "start": "NODE_ENV=production node dist/bin/slack.js",
     "prebuild": "rm -rf dist",
     "build-server": "NODE_ENV=production babel server --out-dir dist --source-maps inline && cp -r server/views dist/views",
     "build-app": "NODE_ENV=production npx webpack --mode production",
     "build": "npm run build-app && npm run build-server",
-    "start": "NODE_ENV=production node dist/bin/slack.js",
-    "postinstall": "npm run build"
+    "postinstall": "npm run build",
+    "test": "jest"
   },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:hexlet-components/projects-frontend-l4-server.git"
-  },
-  "author": "Kirill Mokevnin",
-  "license": "ISC",
-  "homepage": "",
   "dependencies": {
     "@babel/cli": "^7.12.8",
     "@babel/core": "^7.12.9",
