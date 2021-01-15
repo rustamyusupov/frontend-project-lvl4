@@ -1,34 +1,19 @@
 // @ts-check
 
-import 'core-js/stable';
-import 'regenerator-runtime/runtime';
+import "core-js/stable";
+import "regenerator-runtime/runtime";
+import ReactDOM from "react-dom";
+import React from "react";
+import gon from "gon";
 
-import '../assets/application.scss';
+import "../assets/application.scss";
+import Channels from "./components/Channels";
 
-import gon from 'gon';
-
-if (process.env.NODE_ENV !== 'production') {
-  localStorage.debug = 'chat:*';
+if (process.env.NODE_ENV !== "production") {
+  localStorage.debug = "chat:*";
 }
 
-const p = document.createElement('p');
-p.classList.add('card-text');
-p.textContent = 'It works!';
-
-const h5 = document.createElement('h5');
-h5.classList.add('card-title');
-h5.textContent = 'Project frontend l4 boilerplate';
-
-const cardBody = document.createElement('div');
-cardBody.classList.add('card-body');
-cardBody.append(h5, p);
-
-const card = document.createElement('div');
-card.classList.add('card', 'text-center');
-card.append(cardBody);
-
-const container = document.querySelector('#chat');
-container.append(card);
-
-console.log('it works!');
-console.log('gon', gon);
+ReactDOM.render(
+  <Channels list={gon.channels} />,
+  document.getElementById("chat")
+);
