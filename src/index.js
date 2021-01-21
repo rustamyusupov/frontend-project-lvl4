@@ -6,6 +6,7 @@ import gon from "gon";
 
 import "../assets/application.scss";
 import App from "./containers/App";
+import { UserProvider } from "./modules/User/context";
 
 if (process.env.NODE_ENV !== "production") {
   localStorage.debug = "chat:*";
@@ -14,7 +15,12 @@ if (process.env.NODE_ENV !== "production") {
 const mountNode = document.getElementById("chat");
 
 const render = () => {
-  ReactDOM.render(<App channels={gon.channels} />, mountNode);
+  ReactDOM.render(
+    <UserProvider>
+      <App channels={gon.channels} />
+    </UserProvider>,
+    mountNode
+  );
 };
 
 render();
