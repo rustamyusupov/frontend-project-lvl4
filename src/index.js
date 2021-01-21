@@ -11,7 +11,10 @@ if (process.env.NODE_ENV !== "production") {
   localStorage.debug = "chat:*";
 }
 
-ReactDOM.render(
-  <App channels={gon.channels} />,
-  document.getElementById("chat")
-);
+const mountNode = document.getElementById("chat");
+
+const render = () => {
+  ReactDOM.render(<App channels={gon.channels} />, mountNode);
+};
+
+render();
