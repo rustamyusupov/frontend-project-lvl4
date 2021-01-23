@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 import Navigation from "../../components/Navigation";
+import MessageForm from "../../components/MessageForm";
 
 const App = ({ channels }) => {
   const [activeChannel, setActiveChannel] = useState("general");
@@ -25,7 +26,14 @@ const App = ({ channels }) => {
         </div>
         <Navigation items={items} onClick={handleChannelClick} />
       </div>
-      <main className="col h-100"></main>
+      <main className="col h-100">
+        <div className="d-flex flex-column h-100">
+          <div id="messages-box" className="chat-messages overflow-auto mb-3" />
+          <div className="mt-auto">
+            <MessageForm />
+          </div>
+        </div>
+      </main>
     </div>
   );
 };
