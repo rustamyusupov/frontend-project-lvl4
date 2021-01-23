@@ -15,6 +15,8 @@ const App = ({ channels }) => {
 
   const handleChannelClick = (name) => setActiveChannel(name);
 
+  const handleSubmit = (value) => console.log(value);
+
   return (
     <div className="row h-100 pb-3">
       <div className="col-3 border-right">
@@ -30,7 +32,7 @@ const App = ({ channels }) => {
         <div className="d-flex flex-column h-100">
           <div id="messages-box" className="chat-messages overflow-auto mb-3" />
           <div className="mt-auto">
-            <MessageForm />
+            <MessageForm onSubmit={handleSubmit} />
           </div>
         </div>
       </main>
