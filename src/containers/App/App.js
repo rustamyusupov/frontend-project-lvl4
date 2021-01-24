@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import axios from "axios";
 
-import Navigation from "../../components/Navigation";
+import Chat from "../../components/Chat";
 import MessageForm from "../../components/MessageForm";
+import Navigation from "../../components/Navigation";
 
 const App = ({ channels, currentChannelId, messages }) => {
   const items = channels.map(({ id, ...rest }) => ({
@@ -29,7 +29,9 @@ const App = ({ channels, currentChannelId, messages }) => {
       </div>
       <main className="col h-100">
         <div className="d-flex flex-column h-100">
-          <div id="messages-box" className="chat-messages overflow-auto mb-3" />
+          <div id="messages-box" className="chat-messages overflow-auto mb-3">
+            <Chat messages={messages} />
+          </div>
           <div className="mt-auto">
             <MessageForm onSubmit={handleSubmit} />
           </div>
@@ -52,6 +54,7 @@ App.propTypes = {
     PropTypes.shape({
       id: PropTypes.number,
       channelId: PropTypes.number,
+      userName: PropTypes.string,
       value: PropTypes.string,
     })
   ),
