@@ -1,19 +1,18 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import axios from "axios";
 
 import Navigation from "../../components/Navigation";
 import MessageForm from "../../components/MessageForm";
 
-const App = ({ channels }) => {
-  const [activeChannel, setActiveChannel] = useState("general");
-
-  const items = channels.map(({ name, ...rest }) => ({
-    active: name === activeChannel,
-    name,
+const App = ({ channels, currentChannelId, messages }) => {
+  const items = channels.map(({ id, ...rest }) => ({
+    active: id === currentChannelId,
+    id,
     ...rest,
   }));
 
-  const handleChannelClick = (name) => setActiveChannel(name);
+  const handleChannelClick = (name) => console.log(name);
 
   const handleSubmit = (value) => console.log(value);
 
@@ -45,8 +44,21 @@ App.propTypes = {
     PropTypes.shape({
       id: PropTypes.number,
       name: PropTypes.string,
+      removable: PropTypes.bool,
     })
   ).isRequired,
+  currentChannelId: PropTypes.number.isRequired,
+  messages: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      channelId: PropTypes.number,
+      value: PropTypes.string,
+    })
+  ),
+};
+
+App.defaultProps = {
+  messages: [],
 };
 
 export default App;
