@@ -1,6 +1,6 @@
 // @ts-check
 
-import _ from 'lodash';
+import _ from "lodash";
 
 const getNextId = () => Number(_.uniqueId());
 
@@ -9,8 +9,8 @@ const buildState = (defaultState) => {
   const randomChannelId = getNextId();
   const state = {
     channels: [
-      { id: generalChannelId, name: 'general', removable: false },
-      { id: randomChannelId, name: 'random', removable: false },
+      { id: generalChannelId, name: "general", removable: false },
+      { id: randomChannelId, name: "random", removable: false },
     ],
     messages: [],
     currentChannelId: generalChannelId,
@@ -33,12 +33,12 @@ export default (app, io, defaultState = {}) => {
   const state = buildState(defaultState);
 
   app
-    .get('/', (_req, reply) => {
-      reply.view('index.pug', { gon: state });
+    .get("/", (_req, reply) => {
+      reply.view("index.pug", { gon: state });
     })
-    .get('/api/v1/channels', (_req, reply) => {
+    .get("/api/v1/channels", (_req, reply) => {
       const resources = state.channels.map((c) => ({
-        type: 'channels',
+        type: "channels",
         id: c.id,
         attributes: c,
       }));
@@ -47,8 +47,10 @@ export default (app, io, defaultState = {}) => {
       };
       reply.send(response);
     })
-    .post('/api/v1/channels', (req, reply) => {
-      const { data: { attributes: { name } } } = req.body;
+    .post("/api/v1/channels", (req, reply) => {
+      const {
+        attributes: { name },
+      } = req.body;
       const channel = {
         name,
         removable: true,
@@ -57,52 +59,50 @@ export default (app, io, defaultState = {}) => {
       state.channels.push(channel);
       reply.code(201);
       const data = {
-        data: {
-          type: 'channels',
-          id: channel.id,
-          attributes: channel,
-        },
+        type: "channels",
+        id: channel.id,
+        attributes: channel,
       };
 
       reply.send(data);
-      io.emit('newChannel', data);
+      io.emit("newChannel", data);
     })
-    .delete('/api/v1/channels/:id', (req, reply) => {
+    .delete("/api/v1/channels/:id", (req, reply) => {
       const channelId = Number(req.params.id);
       state.channels = state.channels.filter((c) => c.id !== channelId);
       state.messages = state.messages.filter((m) => m.channelId !== channelId);
       reply.code(204);
       const data = {
-        data: {
-          type: 'channels',
-          id: channelId,
-        },
+        type: "channels",
+        id: channelId,
       };
 
       reply.send(data);
-      io.emit('removeChannel', data);
+      io.emit("removeChannel", data);
     })
-    .patch('/api/v1/channels/:id', (req, reply) => {
+    .patch("/api/v1/channels/:id", (req, reply) => {
       const channelId = Number(req.params.id);
       const channel = state.channels.find((c) => c.id === channelId);
 
-      const { data: { attributes } } = req.body;
+      const {
+        data: { attributes },
+      } = req.body;
       channel.name = attributes.name;
 
       const data = {
-        data: {
-          type: 'channels',
-          id: channelId,
-          attributes: channel,
-        },
+        type: "channels",
+        id: channelId,
+        attributes: channel,
       };
       reply.send(data);
-      io.emit('renameChannel', data);
+      io.emit("renameChannel", data);
     })
-    .get('/api/v1/channels/:channelId/messages', (req, reply) => {
-      const messages = state.messages.filter((m) => m.channelId === Number(req.params.channelId));
+    .get("/api/v1/channels/:channelId/messages", (req, reply) => {
+      const messages = state.messages.filter(
+        (m) => m.channelId === Number(req.params.channelId)
+      );
       const resources = messages.map((m) => ({
-        type: 'messages',
+        type: "messages",
         id: m.id,
         attributes: m,
       }));
@@ -111,8 +111,10 @@ export default (app, io, defaultState = {}) => {
       };
       reply.send(response);
     })
-    .post('/api/v1/channels/:channelId/messages', (req, reply) => {
-      const { data: { attributes } } = req.body;
+    .post("/api/v1/channels/:channelId/messages", (req, reply) => {
+      const {
+        data: { attributes },
+      } = req.body;
       const message = {
         ...attributes,
         channelId: Number(req.params.channelId),
@@ -121,13 +123,11 @@ export default (app, io, defaultState = {}) => {
       state.messages.push(message);
       reply.code(201);
       const data = {
-        data: {
-          type: 'messages',
-          id: message.id,
-          attributes: message,
-        },
+        type: "messages",
+        id: message.id,
+        attributes: message,
       };
       reply.send(data);
-      io.emit('newMessage', data);
+      io.emit("newMessage", data);
     });
 };
