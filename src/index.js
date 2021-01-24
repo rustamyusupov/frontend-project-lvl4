@@ -17,7 +17,7 @@ const mountNode = document.getElementById("chat");
 const render = () => {
   ReactDOM.render(
     <UserProvider>
-      <App channels={gon.channels} />
+      <App {...gon} />
     </UserProvider>,
     mountNode
   );
