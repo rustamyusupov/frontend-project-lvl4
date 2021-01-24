@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import axios from "axios";
 
-// import { useUser } from "../../modules/User/context";
+import { useUser } from "../../modules/User/context";
 
 import Chat from "../../components/Chat";
 import MessageForm from "../../components/MessageForm";
@@ -9,7 +10,7 @@ import Navigation from "../../components/Navigation";
 
 const App = ({ channels, currentChannelId, messages }) => {
   const [activeChannel, setActiveChannel] = useState(currentChannelId);
-  // const userName = useUser();
+  const userName = useUser();
 
   const items = channels.map(({ id, ...rest }) => ({
     active: id === activeChannel,
@@ -19,7 +20,12 @@ const App = ({ channels, currentChannelId, messages }) => {
 
   const handleChannelClick = (id) => setActiveChannel(id);
 
-  const handleSubmit = (value) => console.log(value);
+  const handleSubmit = async (value) => {
+    const result = await axios.post(
+      `/api/v1/channels/${activeChannel}/messages`,
+      { data: { attributes: { userName, value } } }
+    );
+  };
 
   return (
     <div className="row h-100 pb-3">
