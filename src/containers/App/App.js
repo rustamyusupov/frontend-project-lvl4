@@ -1,18 +1,23 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
+// import { useUser } from "../../modules/User/context";
+
 import Chat from "../../components/Chat";
 import MessageForm from "../../components/MessageForm";
 import Navigation from "../../components/Navigation";
 
 const App = ({ channels, currentChannelId, messages }) => {
+  const [activeChannel, setActiveChannel] = useState(currentChannelId);
+  // const userName = useUser();
+
   const items = channels.map(({ id, ...rest }) => ({
-    active: id === currentChannelId,
+    active: id === activeChannel,
     id,
     ...rest,
   }));
 
-  const handleChannelClick = (name) => console.log(name);
+  const handleChannelClick = (id) => setActiveChannel(id);
 
   const handleSubmit = (value) => console.log(value);
 
