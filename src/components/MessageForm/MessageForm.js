@@ -5,8 +5,9 @@ import { Formik, Form, Field } from "formik";
 const MessageForm = ({ onSubmit }) => (
   <Formik
     initialValues={{ message: "" }}
-    onSubmit={({ message }, { setSubmitting }) => {
+    onSubmit={({ message }, { resetForm, setSubmitting }) => {
       onSubmit(message);
+      resetForm();
       setSubmitting(false);
     }}
   >
