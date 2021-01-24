@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const Navigation = ({ items, onClick }) => {
-  const handleClick = (name) => () => onClick(name);
+  const handleClick = (id) => () => onClick(id);
 
   return (
     <ul className="nav flex-column nav-pills nav-fill">
@@ -13,7 +13,7 @@ const Navigation = ({ items, onClick }) => {
             className={`nav-link mb-2 text-left btn btn-block ${
               active ? "btn-primary" : "btn-light"
             }`}
-            onClick={handleClick(name)}
+            onClick={handleClick(id)}
           >
             {name}
           </button>
