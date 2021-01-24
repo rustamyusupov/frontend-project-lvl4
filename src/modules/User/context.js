@@ -16,7 +16,7 @@ const useUser = () => {
 
 const UserProvider = (props) => {
   const name = getUserName();
-  const value = { name };
+  const value = name;
 
   return <UserContext.Provider value={value} {...props} />;
 };
