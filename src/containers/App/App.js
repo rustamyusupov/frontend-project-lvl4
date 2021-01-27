@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import axios from "axios";
+import { useDispatch } from "react-redux";
 
 import { useUser } from "../../modules/User/context";
+import { create as createMessage } from "../../modules/Message";
 
 import Chat from "../../components/Chat";
 import MessageForm from "../../components/MessageForm";
 import Navigation from "../../components/Navigation";
 
 const App = ({ channels, currentChannelId, messages }) => {
+  const dispatch = useDispatch();
   const [activeChannel, setActiveChannel] = useState(currentChannelId);
   const userName = useUser();
 
@@ -20,12 +22,8 @@ const App = ({ channels, currentChannelId, messages }) => {
 
   const handleChannelClick = (id) => setActiveChannel(id);
 
-  const handleSubmit = async (value) => {
-    const result = await axios.post(
-      `/api/v1/channels/${activeChannel}/messages`,
-      { data: { attributes: { userName, value } } }
-    );
-  };
+  const handleSubmit = (text) =>
+    dispatch(createMessage({ channel: activeChannel, userName, text }));
 
   return (
     <div className="row h-100 pb-3">
@@ -66,7 +64,7 @@ App.propTypes = {
       id: PropTypes.number,
       channelId: PropTypes.number,
       userName: PropTypes.string,
-      value: PropTypes.string,
+      text: PropTypes.string,
     })
   ),
 };
