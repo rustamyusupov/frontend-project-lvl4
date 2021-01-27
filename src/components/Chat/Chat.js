@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const Chat = ({ messages }) =>
-  messages.map(({ id, userName, value }) => (
+  messages.map(({ id, userName, text }) => (
     <div key={id} className="text-break">
-      <b>{userName}</b>: {value}
+      <b>{userName}</b>: {text}
     </div>
   ));
 
@@ -14,7 +14,7 @@ Chat.propTypes = {
       id: PropTypes.number,
       channelId: PropTypes.number,
       userName: PropTypes.string,
-      value: PropTypes.string,
+      text: PropTypes.string,
     })
   ),
 };
