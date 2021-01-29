@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 
 import { useUser } from "../../modules/User/context";
-import { create as createMessage } from "../../modules/Message";
+import { create as createMessage } from "../../modules/Message/redux";
 
 import Chat from "../../components/Chat";
 import MessageForm from "../../components/MessageForm";
