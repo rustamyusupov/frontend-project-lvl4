@@ -3,20 +3,20 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import create from "./thunk";
 
-const message = createSlice({
-  name: "message",
+const messages = createSlice({
+  name: "messages",
   initialState: {
-    data: {},
+    items: [],
     error: "",
   },
   reducers: {},
   extraReducers: {
     [create.fulfilled]: (state, action) => {
-      state.data = action.payload;
+      state.items = action.payload;
       state.error = "";
     },
     [create.rejected]: (state, action) => {
-      state.data = {};
+      state.items = [];
       state.error = action.payload.error;
     },
   },
@@ -24,4 +24,4 @@ const message = createSlice({
 
 export { default as create } from "./thunk";
 
-export default message.reducer;
+export default messages.reducer;

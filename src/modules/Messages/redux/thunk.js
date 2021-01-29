@@ -2,7 +2,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 const create = createAsyncThunk(
-  "message/create",
+  "messages/create",
   async ({ channel, userName, text }, { extra: { request } }) => {
     const url = `/api/v1/channels/${channel}/messages`;
     const options = {
