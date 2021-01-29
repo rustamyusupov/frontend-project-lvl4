@@ -2,7 +2,7 @@ import "core-js/stable";
 import "regenerator-runtime/runtime";
 import ReactDOM from "react-dom";
 import React from "react";
-import gon from "gon";
+import { channels, currentChannelId, messages } from "gon";
 import { Provider } from "react-redux";
 
 import "../assets/application.scss";
@@ -14,7 +14,10 @@ if (process.env.NODE_ENV !== "production") {
   localStorage.debug = "chat:*";
 }
 
-const initialState = {};
+const initialState = {
+  channels: { items: channels, currentChannelId },
+  messages: { items: messages },
+};
 const store = configureStore(initialState);
 const mountNode = document.getElementById("chat");
 
@@ -22,7 +25,7 @@ const render = () => {
   ReactDOM.render(
     <Provider store={store}>
       <UserProvider>
-        <App {...gon} />
+        <App />
       </UserProvider>
     </Provider>,
     mountNode
