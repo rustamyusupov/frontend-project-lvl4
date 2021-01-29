@@ -1,18 +1,14 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { useDispatch } from "react-redux";
 
 import { useUser } from "../../modules/User/context";
-import { create as createMessage } from "../../modules/Message/redux";
-
+import Input from "../../modules/Message/containers/Input";
 import Chat from "../../components/Chat";
-import MessageForm from "../../components/MessageForm";
 import Navigation from "../../components/Navigation";
 
 const App = ({ channels, currentChannelId, messages }) => {
-  const dispatch = useDispatch();
-  const [activeChannel, setActiveChannel] = useState(currentChannelId);
   const userName = useUser();
+  const [activeChannel, setActiveChannel] = useState(currentChannelId);
 
   const items = channels.map(({ id, ...rest }) => ({
     active: id === activeChannel,
@@ -21,9 +17,6 @@ const App = ({ channels, currentChannelId, messages }) => {
   }));
 
   const handleChannelClick = (id) => setActiveChannel(id);
-
-  const handleSubmit = (text) =>
-    dispatch(createMessage({ channel: activeChannel, userName, text }));
 
   return (
     <div className="row h-100 pb-3">
@@ -42,7 +35,7 @@ const App = ({ channels, currentChannelId, messages }) => {
             <Chat messages={messages} />
           </div>
           <div className="mt-auto">
-            <MessageForm onSubmit={handleSubmit} />
+            <Input activeChannel={activeChannel} userName={userName} />
           </div>
         </div>
       </main>
