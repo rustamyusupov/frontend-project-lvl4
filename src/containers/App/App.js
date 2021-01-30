@@ -7,6 +7,7 @@ import {
   getChannels,
   getCurrentChannel,
 } from "../../modules/Channels/redux/selectors";
+import { getMessages } from "../../modules/Messages/redux/selectors";
 import Input from "../../modules/Messages/containers/Input";
 import { useUser } from "../../modules/User/context";
 import Chat from "../../components/Chat";
@@ -17,6 +18,7 @@ const App = () => {
   const userName = useUser();
   const channels = useSelector(getChannels);
   const activeChannel = useSelector(getCurrentChannel);
+  const messages = useSelector(getMessages);
 
   const handleChannelClick = (id) => dispatch(setCurrentChannel(id));
 
@@ -34,7 +36,7 @@ const App = () => {
       <main className="col h-100">
         <div className="d-flex flex-column h-100">
           <div id="messages-box" className="chat-messages overflow-auto mb-3">
-            {/* <Chat messages={messages} /> */}
+            <Chat messages={messages} />
           </div>
           <div className="mt-auto">
             <Input activeChannel={activeChannel} userName={userName} />
@@ -43,29 +45,6 @@ const App = () => {
       </main>
     </div>
   );
-};
-
-App.propTypes = {
-  // channels: PropTypes.arrayOf(
-  //   PropTypes.shape({
-  //     id: PropTypes.number,
-  //     name: PropTypes.string,
-  //     removable: PropTypes.bool,
-  //   })
-  // ).isRequired,
-  // currentChannelId: PropTypes.number.isRequired,
-  // messages: PropTypes.arrayOf(
-  //   PropTypes.shape({
-  //     id: PropTypes.number,
-  //     channelId: PropTypes.number,
-  //     userName: PropTypes.string,
-  //     text: PropTypes.string,
-  //   })
-  // ),
-};
-
-App.defaultProps = {
-  // messages: [],
 };
 
 export default App;
