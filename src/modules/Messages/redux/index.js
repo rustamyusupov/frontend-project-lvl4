@@ -11,12 +11,7 @@ const messages = createSlice({
   },
   reducers: {},
   extraReducers: {
-    [create.fulfilled]: (state, action) => {
-      state.items = action.payload;
-      state.error = "";
-    },
     [create.rejected]: (state, action) => {
-      state.items = [];
       state.error = action.payload.error;
     },
   },

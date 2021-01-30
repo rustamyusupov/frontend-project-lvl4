@@ -10,9 +10,7 @@ const create = createAsyncThunk(
       data: { attributes: { userName, text } },
     };
 
-    const response = await request(url, options);
-
-    return response;
+    await request(url, options);
   }
 );
 
