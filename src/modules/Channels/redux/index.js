@@ -6,9 +6,14 @@ const channels = createSlice({
   initialState: {
     currentChannelId: 1,
     items: [],
-    error: "",
   },
-  reducers: {},
+  reducers: {
+    setCurrentChannel: (state, action) => {
+      state.currentChannelId = action.payload;
+    },
+  },
 });
+
+export const { setCurrentChannel } = channels.actions;
 
 export default channels.reducer;
