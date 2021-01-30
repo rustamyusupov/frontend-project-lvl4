@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 
 import { setCurrentChannel } from "../../modules/Channels/redux";
