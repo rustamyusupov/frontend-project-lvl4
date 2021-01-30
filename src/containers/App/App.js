@@ -1,22 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
 
+import { setCurrentChannel } from "../../modules/Channels/redux";
+import {
+  getChannels,
+  getCurrentChannel,
+} from "../../modules/Channels/redux/selectors";
+import Input from "../../modules/Messages/containers/Input";
 import { useUser } from "../../modules/User/context";
-import Input from "../../modules/Message/containers/Input";
 import Chat from "../../components/Chat";
 import Navigation from "../../components/Navigation";
 
-const App = ({ channels, currentChannelId, messages }) => {
+const App = () => {
+  const dispatch = useDispatch();
   const userName = useUser();
-  const [activeChannel, setActiveChannel] = useState(currentChannelId);
+  const channels = useSelector(getChannels);
+  const activeChannel = useSelector(getCurrentChannel);
 
-  const items = channels.map(({ id, ...rest }) => ({
-    active: id === activeChannel,
-    id,
-    ...rest,
-  }));
-
-  const handleChannelClick = (id) => setActiveChannel(id);
+  const handleChannelClick = (id) => dispatch(setCurrentChannel(id));
 
   return (
     <div className="row h-100 pb-3">
@@ -27,12 +29,12 @@ const App = ({ channels, currentChannelId, messages }) => {
             +
           </button>
         </div>
-        <Navigation items={items} onClick={handleChannelClick} />
+        <Navigation items={channels} onClick={handleChannelClick} />
       </div>
       <main className="col h-100">
         <div className="d-flex flex-column h-100">
           <div id="messages-box" className="chat-messages overflow-auto mb-3">
-            <Chat messages={messages} />
+            {/* <Chat messages={messages} /> */}
           </div>
           <div className="mt-auto">
             <Input activeChannel={activeChannel} userName={userName} />
@@ -44,26 +46,26 @@ const App = ({ channels, currentChannelId, messages }) => {
 };
 
 App.propTypes = {
-  channels: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      name: PropTypes.string,
-      removable: PropTypes.bool,
-    })
-  ).isRequired,
-  currentChannelId: PropTypes.number.isRequired,
-  messages: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      channelId: PropTypes.number,
-      userName: PropTypes.string,
-      text: PropTypes.string,
-    })
-  ),
+  // channels: PropTypes.arrayOf(
+  //   PropTypes.shape({
+  //     id: PropTypes.number,
+  //     name: PropTypes.string,
+  //     removable: PropTypes.bool,
+  //   })
+  // ).isRequired,
+  // currentChannelId: PropTypes.number.isRequired,
+  // messages: PropTypes.arrayOf(
+  //   PropTypes.shape({
+  //     id: PropTypes.number,
+  //     channelId: PropTypes.number,
+  //     userName: PropTypes.string,
+  //     text: PropTypes.string,
+  //   })
+  // ),
 };
 
 App.defaultProps = {
-  messages: [],
+  // messages: [],
 };
 
 export default App;
