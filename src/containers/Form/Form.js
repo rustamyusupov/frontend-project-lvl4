@@ -1,17 +1,20 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Formik } from "formik";
 
-import { create as createMessage } from "../../redux";
-import Form from "../../components/Form";
+import { getCurrentChannel } from "../../modules/Channels/selectors";
+import { create as createMessage } from "../../modules/Messages";
+import { useUser } from "../../modules/User/context";
+import MessageForm from "../../components/MessageForm";
 
 const initialValues = {
   message: "",
 };
 
-const Input = ({ activeChannel, userName }) => {
+const Form = () => {
   const dispatch = useDispatch();
+  const activeChannel = useSelector(getCurrentChannel);
+  const userName = useUser();
 
   const handleSubmit = async (
     { message },
@@ -33,16 +36,11 @@ const Input = ({ activeChannel, userName }) => {
 
   return (
     <Formik
-      component={Form}
+      component={MessageForm}
       initialValues={initialValues}
       onSubmit={handleSubmit}
     />
   );
 };
 
-Input.propTypes = {
-  activeChannel: PropTypes.number.isRequired,
-  userName: PropTypes.string.isRequired,
-};
-
-export default Input;
+export default Form;

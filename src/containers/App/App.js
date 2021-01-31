@@ -1,26 +1,10 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 
-import { setCurrentChannel } from "../../modules/Channels/redux";
-import {
-  getChannels,
-  getCurrentChannel,
-} from "../../modules/Channels/redux/selectors";
-import { getMessages } from "../../modules/Messages/redux/selectors";
-import Input from "../../modules/Messages/containers/Input";
-import { useUser } from "../../modules/User/context";
-import Chat from "../../components/Chat";
-import Navigation from "../../components/Navigation";
+import Form from "../Form";
+import Messages from "../Messages";
+import SideBar from "../SideBar";
 
 const App = () => {
-  const dispatch = useDispatch();
-  const userName = useUser();
-  const channels = useSelector(getChannels);
-  const activeChannel = useSelector(getCurrentChannel);
-  const messages = useSelector(getMessages);
-
-  const handleChannelClick = (id) => dispatch(setCurrentChannel(id));
-
   return (
     <div className="row h-100 pb-3">
       <div className="col-3 border-right">
@@ -30,15 +14,15 @@ const App = () => {
             +
           </button>
         </div>
-        <Navigation items={channels} onClick={handleChannelClick} />
+        <SideBar />
       </div>
       <main className="col h-100">
         <div className="d-flex flex-column h-100">
           <div id="messages-box" className="chat-messages overflow-auto mb-3">
-            <Chat messages={messages} />
+            <Messages />
           </div>
           <div className="mt-auto">
-            <Input activeChannel={activeChannel} userName={userName} />
+            <Form />
           </div>
         </div>
       </main>

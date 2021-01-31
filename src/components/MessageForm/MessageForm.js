@@ -19,7 +19,7 @@ const MessageForm = ({ errors, isSubmitting }) => (
         >
           Submit
         </button>
-        <div className="d-block invalid-feedback">{errors.message}</div>
+        <div className="d-block invalid-feedback">{errors.message}&nbsp;</div>
       </div>
     </div>
   </Form>

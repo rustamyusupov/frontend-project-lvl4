@@ -9,7 +9,7 @@ import io from "socket.io-client";
 import "../assets/application.scss";
 import configureStore from "./redux/configureStore";
 import { UserProvider } from "./modules/User/context";
-import { addMessage } from "./modules/Messages/redux";
+import { addMessage } from "./modules/Messages";
 import App from "./containers/App";
 
 const initialState = {

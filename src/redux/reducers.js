@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 
-import channels from "../modules/Channels/redux";
-import messages from "../modules/Messages/redux";
+import channels from "../modules/Channels";
+import messages from "../modules/Messages";
 
 const createReducer = combineReducers({ channels, messages });
 
