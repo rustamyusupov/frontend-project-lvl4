@@ -2,7 +2,7 @@ import React from "react";
 
 import Form from "containers/Form";
 import Messages from "containers/Messages";
-import SideBar from "containers/SideBar";
+// import SideBar from "containers/SideBar";
 
 const App = () => {
   return (
@@ -14,7 +14,7 @@ const App = () => {
             +
           </button>
         </div>
-        <SideBar />
+        {/* <SideBar /> */}
       </div>
       <main className="col h-100">
         <div className="d-flex flex-column h-100">
