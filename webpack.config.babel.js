@@ -1,45 +1,44 @@
 // @ts-check
 
-import path from 'path';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import path from "path";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
 
-const mode = process.env.NODE_ENV || 'development';
+const mode = process.env.NODE_ENV || "development";
 
 module.exports = {
   mode,
   externals: {
-    gon: 'gon',
+    gon: "gon",
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    modules: [path.resolve(__dirname, "./src"), "node_modules"],
+    extensions: [".js", ".jsx"],
   },
   output: {
-    path: path.join(__dirname, 'dist', 'public'),
-    publicPath: '/assets/',
+    path: path.join(__dirname, "dist", "public"),
+    publicPath: "/assets/",
   },
   devServer: {
-    host: 'localhost',
+    host: "localhost",
     port: 8080,
-    publicPath: '/assets/',
+    publicPath: "/assets/",
     compress: true,
   },
-  plugins: [
-    new MiniCssExtractPlugin(),
-  ],
+  plugins: [new MiniCssExtractPlugin()],
   module: {
     rules: [
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: 'babel-loader',
+        use: "babel-loader",
       },
       {
         test: /\.s[ac]ss$/i,
         use: [
           { loader: MiniCssExtractPlugin.loader },
-          { loader: 'css-loader' },
-          { loader: 'postcss-loader' },
-          { loader: 'sass-loader' },
+          { loader: "css-loader" },
+          { loader: "postcss-loader" },
+          { loader: "sass-loader" },
         ],
       },
     ],
