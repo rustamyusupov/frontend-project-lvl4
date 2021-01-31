@@ -9,7 +9,11 @@ const messages = createSlice({
     items: [],
     error: "",
   },
-  reducers: {},
+  reducers: {
+    addMessage: (state, action) => {
+      state.items.push(action.payload);
+    },
+  },
   extraReducers: {
     [create.rejected]: (state, action) => {
       state.error = action.payload.error;
@@ -18,5 +22,7 @@ const messages = createSlice({
 });
 
 export { default as create } from "./thunk";
+
+export const { addMessage } = messages.actions;
 
 export default messages.reducer;
