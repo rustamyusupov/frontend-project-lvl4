@@ -2,14 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Form, Field } from "formik";
 
-const MessageForm = ({ isSubmitting }) => (
+const MessageForm = ({ errors, isSubmitting }) => (
   <Form noValidate>
     <div className="form-group">
       <div className="input-group">
         <Field
           name="message"
           aria-label="message"
-          className="mr-2 form-control"
+          className={`mr-2 form-control ${errors.message ? "is-invalid" : ""}`}
         />
         <button
           aria-label="submit"
@@ -19,17 +19,21 @@ const MessageForm = ({ isSubmitting }) => (
         >
           Submit
         </button>
-        <div className="d-block invalid-feedback">&nbsp;</div>
+        <div className="d-block invalid-feedback">{errors.message}</div>
       </div>
     </div>
   </Form>
 );
 
 MessageForm.propTypes = {
+  errors: PropTypes.shape({
+    message: PropTypes.string,
+  }),
   isSubmitting: PropTypes.bool,
 };
 
 MessageForm.defaultProps = {
+  errors: {},
   isSubmitting: false,
 };
 
