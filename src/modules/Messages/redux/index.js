@@ -16,7 +16,7 @@ const messages = createSlice({
   },
   extraReducers: {
     [create.rejected]: (state, action) => {
-      state.error = action.payload.error;
+      state.error = action.error.message;
     },
   },
 });
