@@ -4,15 +4,13 @@ import ReactDOM from "react-dom";
 import React from "react";
 import { channels, currentChannelId, messages } from "gon";
 import { Provider } from "react-redux";
+import io from "socket.io-client";
 
 import "../assets/application.scss";
 import configureStore from "./redux/configureStore";
 import { UserProvider } from "./modules/User/context";
+import { addMessage } from "./modules/Messages/redux";
 import App from "./containers/App";
-
-if (process.env.NODE_ENV !== "production") {
-  localStorage.debug = "chat:*";
-}
 
 const initialState = {
   channels: { items: channels, currentChannelId },
@@ -20,6 +18,7 @@ const initialState = {
 };
 const store = configureStore(initialState);
 const mountNode = document.getElementById("chat");
+const socket = io();
 
 const render = () => {
   ReactDOM.render(
@@ -31,5 +30,13 @@ const render = () => {
     mountNode
   );
 };
+
+if (process.env.NODE_ENV !== "production") {
+  localStorage.debug = "chat:*";
+}
+
+socket.on("newMessage", ({ attributes }) =>
+  store.dispatch(addMessage(attributes))
+);
 
 render();
