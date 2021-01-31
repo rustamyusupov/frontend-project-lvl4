@@ -13,18 +13,30 @@ const initialValues = {
 const Input = ({ activeChannel, userName }) => {
   const dispatch = useDispatch();
 
-  const handleSubmit = ({ message }, { resetForm, setSubmitting }) => {
-    dispatch(
+  const handleSubmit = async (
+    { message },
+    { setFieldError, resetForm, setSubmitting }
+  ) => {
+    const response = await dispatch(
       createMessage({ channel: activeChannel, userName, text: message })
     );
-    resetForm();
+
     setSubmitting(false);
+
+    if (response.error) {
+      setFieldError("message", response.error?.message, false);
+      return;
+    }
+
+    resetForm();
   };
 
   return (
-    <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-      {({ isSubmitting }) => <Form isSubmitting={isSubmitting} />}
-    </Formik>
+    <Formik
+      component={Form}
+      initialValues={initialValues}
+      onSubmit={handleSubmit}
+    />
   );
 };
 
