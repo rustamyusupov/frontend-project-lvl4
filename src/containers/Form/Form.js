@@ -2,10 +2,10 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Formik } from "formik";
 
-import { getCurrentChannel } from "../../modules/Channels/selectors";
-import { create as createMessage } from "../../modules/Messages";
-import { useUser } from "../../modules/User/context";
-import MessageForm from "../../components/MessageForm";
+import { getCurrentChannel } from "modules/Channels/selectors";
+import { create as createMessage } from "modules/Messages";
+import { useUser } from "modules/User/context";
+import MessageForm from "components/MessageForm";
 
 const initialValues = {
   message: "",

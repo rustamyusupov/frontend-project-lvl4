@@ -1,7 +1,7 @@
 import { get, filter } from "lodash/fp";
 import { createSelector } from "@reduxjs/toolkit";
 
-import { getCurrentChannel } from "../../Channels/selectors";
+import { getCurrentChannel } from "modules/Channels/selectors";
 
 const getMessages = createSelector(
   get("messages.items"),

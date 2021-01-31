@@ -1,8 +1,8 @@
 import React from "react";
 
-import Form from "../Form";
-import Messages from "../Messages";
-import SideBar from "../SideBar";
+import Form from "containers/Form";
+import Messages from "containers/Messages";
+import SideBar from "containers/SideBar";
 
 const App = () => {
   return (

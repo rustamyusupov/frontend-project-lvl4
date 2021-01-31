@@ -1,9 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { setCurrentChannel } from "../../modules/Channels";
-import { getChannels } from "../../modules/Channels/selectors";
-import Navigation from "../../components/Navigation";
+import { setCurrentChannel } from "modules/Channels";
+import { getChannels } from "modules/Channels/selectors";
+import Navigation from "components/Navigation";
 
 const Sidebar = () => {
   const dispatch = useDispatch();

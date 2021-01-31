@@ -7,10 +7,10 @@ import { Provider } from "react-redux";
 import io from "socket.io-client";
 
 import "../assets/application.scss";
-import configureStore from "./redux/configureStore";
-import { UserProvider } from "./modules/User/context";
-import { addMessage } from "./modules/Messages";
-import App from "./containers/App";
+import configureStore from "redux/configureStore";
+import { addMessage } from "modules/Messages";
+import { UserProvider } from "modules/User/context";
+import App from "containers/App";
 
 const initialState = {
   channels: { items: channels, currentChannelId },

@@ -1,6 +1,6 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 
-import request from "../utils/request";
+import request from "utils/request";
 
 import reducer from "./reducers";
 
