@@ -9,9 +9,9 @@ const Sidebar = () => {
   const dispatch = useDispatch();
   const channels = useSelector(getChannels);
 
-  const handleChannelClick = (id) => dispatch(setCurrentChannel(id));
+  const handleClick = (id) => dispatch(setCurrentChannel(id));
 
-  return <Navigation items={channels} onClick={handleChannelClick} />;
+  return <Navigation items={channels} onClick={handleClick} />;
 };
 
 export default Sidebar;
