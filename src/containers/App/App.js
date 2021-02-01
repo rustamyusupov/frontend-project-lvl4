@@ -8,12 +8,6 @@ const App = () => {
   return (
     <div className="row h-100 pb-3">
       <div className="col-3 border-right">
-        <div className="d-flex mb-2">
-          <span>Channels</span>
-          <button type="button" className="ml-auto p-0 btn btn-link">
-            +
-          </button>
-        </div>
         <Sidebar />
       </div>
       <main className="col h-100">
@@ -22,7 +16,7 @@ const App = () => {
             <Messages />
           </div>
           <div className="mt-auto">
-            <Form />
+            <Form /> {/* переименовать */}
           </div>
         </div>
       </main>
