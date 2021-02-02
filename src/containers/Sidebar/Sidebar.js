@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { setCurrentChannel } from "modules/Channels";
 import { getChannels } from "modules/Channels/selectors";
+import AddChannel from "containers/AddChannel";
 import Modal from "components/Modal";
 import Navigation from "components/Navigation";
 
@@ -28,7 +29,14 @@ const Sidebar = () => {
         </button>
       </div>
       <Navigation items={channels} onClick={handleChannelClick} />
-      <Modal show={show} title="Add channel" onClose={handleCloseClick} />
+      <Modal
+        content={
+          <AddChannel onClose={handleCloseClick} onSubmit={handleCloseClick} />
+        }
+        show={show}
+        title="Add channel"
+        onClose={handleCloseClick}
+      />
     </>
   );
 };
