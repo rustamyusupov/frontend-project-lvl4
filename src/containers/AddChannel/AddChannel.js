@@ -36,7 +36,7 @@ const AddChannel = ({ onClose, onSubmit }) => {
       validate={validate}
       onSubmit={handleSubmit}
     >
-      <AddChannelForm onClose={onClose} />
+      {(props) => <AddChannelForm onClose={onClose} {...props} />}
     </Formik>
   );
 };
