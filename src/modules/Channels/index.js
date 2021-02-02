@@ -11,13 +11,13 @@ const channels = createSlice({
     setCurrentChannel: (state, action) => {
       state.currentChannelId = action.payload;
     },
-    reducers: {
-      addChannel: (state, action) => {
-        state.items.push(action.payload);
-      },
+    addChannel: (state, action) => {
+      state.items.push(action.payload);
     },
   },
 });
+
+export { default as create } from "./thunk";
 
 export const { setCurrentChannel, addChannel } = channels.actions;
 
