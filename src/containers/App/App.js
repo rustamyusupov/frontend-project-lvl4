@@ -1,7 +1,7 @@
 import React from "react";
 
-import Form from "containers/Form";
-import Messages from "containers/Messages";
+import InputForm from "containers/InputForm";
+import MessageBox from "containers/MessageBox";
 import Sidebar from "containers/Sidebar";
 
 const App = () => {
@@ -13,10 +13,10 @@ const App = () => {
       <main className="col h-100">
         <div className="d-flex flex-column h-100">
           <div id="messages-box" className="chat-messages overflow-auto mb-3">
-            <Messages />
+            <MessageBox />
           </div>
           <div className="mt-auto">
-            <Form /> {/* переименовать */}
+            <InputForm />
           </div>
         </div>
       </main>

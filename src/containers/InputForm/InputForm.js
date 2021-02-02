@@ -11,7 +11,7 @@ const initialValues = {
   message: "",
 };
 
-const Form = () => {
+const InputForm = () => {
   const dispatch = useDispatch();
   const activeChannel = useSelector(getCurrentChannel);
   const userName = useUser();
@@ -43,4 +43,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default InputForm;
