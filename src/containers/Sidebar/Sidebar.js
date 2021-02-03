@@ -1,25 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "react-bootstrap";
 
-import { setCurrentChannel } from "modules/Channels";
+import { setCurrentChannel, create as createChannel } from "modules/Channels";
 import { getChannels } from "modules/Channels/selectors";
-import AddChannel from "containers/AddChannel";
+import AddChannel from "components/AddChannel";
 import Modal from "components/Modal";
 import Navigation from "components/Navigation";
 
 const Sidebar = () => {
   const dispatch = useDispatch();
   const channels = useSelector(getChannels);
-  const [show, setShow] = useState(false);
 
-  const handleActionClick = (type) => (id) =>
-    console.log({ type, id }) || setShow(true);
-  const handleCloseClick = () => setShow(false);
+  const handleAction = (type) => (id) => dispatch(showModal({ type, id }));
   const handleChannelClick = (id) => dispatch(setCurrentChannel(id));
 
-  // 1. think about decomposition
-  // 2. move modals to App
+  const handleClose = () => dispatch(hideModal());
+  const handleSubmit = (name) => dispatch(createChannel({ name }));
+
+  // 1. move modals to App
+  // 2. think about decomposition
   // 3. show modals actions, content
 
   return (
@@ -29,7 +29,7 @@ const Sidebar = () => {
         <Button
           variant="link"
           className="ml-auto p-0"
-          onClick={handleActionClick("add")}
+          onClick={handleAction("add")}
         >
           +
         </Button>
@@ -37,16 +37,14 @@ const Sidebar = () => {
       <Navigation
         items={channels}
         onClick={handleChannelClick}
-        onRename={handleActionClick("rename")}
-        onRemove={handleActionClick("remove")}
+        onRename={handleAction("rename")}
+        onRemove={handleAction("remove")}
       />
       <Modal
-        content={
-          <AddChannel onClose={handleCloseClick} onSubmit={handleCloseClick} />
-        }
-        show={show}
         title="Add channel"
-        onClose={handleCloseClick}
+        show={show}
+        content={<AddChannel onClose={handleClose} onSubmit={handleSubmit} />}
+        onClose={handleClose}
       />
     </>
   );
