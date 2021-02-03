@@ -1,9 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useDispatch } from "react-redux";
 import { Formik } from "formik";
 
-import { create as createChannel } from "modules/Channels";
 import AddChannelForm from "components/AddChannelForm";
 
 const initialValues = {
@@ -21,13 +19,10 @@ const validate = (values) => {
 };
 
 const AddChannel = ({ onClose, onSubmit }) => {
-  const dispatch = useDispatch();
-
   const handleSubmit = ({ name }, { resetForm, setSubmitting }) => {
-    dispatch(createChannel({ name }));
+    onSubmit(name);
     setSubmitting(false);
     resetForm();
-    onSubmit();
   };
 
   return (
@@ -42,11 +37,8 @@ const AddChannel = ({ onClose, onSubmit }) => {
 };
 
 AddChannel.propTypes = {
-  onClose: PropTypes.func,
-};
-
-AddChannel.defaultProps = {
-  onClose: () => {},
+  onClose: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };
 
 export default AddChannel;
