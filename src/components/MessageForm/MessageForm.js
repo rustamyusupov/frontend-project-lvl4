@@ -1,28 +1,26 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Form, Field } from "formik";
+import { Form as FormikForm, Field } from "formik";
+import { Form, InputGroup, Button } from "react-bootstrap";
 
 const MessageForm = ({ errors, isSubmitting }) => (
-  <Form noValidate>
-    <div className="form-group">
-      <div className="input-group">
+  <FormikForm noValidate>
+    <Form.Group>
+      <InputGroup>
         <Field
           name="message"
           aria-label="message"
           className={`mr-2 form-control ${errors.message ? "is-invalid" : ""}`}
         />
-        <button
-          aria-label="submit"
-          type="submit"
-          className="btn btn-primary"
-          disabled={isSubmitting}
-        >
+        <Button type="submit" disabled={isSubmitting}>
           Submit
-        </button>
-        <div className="d-block invalid-feedback">{errors.message}&nbsp;</div>
-      </div>
-    </div>
-  </Form>
+        </Button>
+        <Form.Control.Feedback type="invalid">
+          {errors.message}&nbsp;
+        </Form.Control.Feedback>
+      </InputGroup>
+    </Form.Group>
+  </FormikForm>
 );
 
 MessageForm.propTypes = {
