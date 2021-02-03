@@ -1,27 +1,29 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Form, Field } from "formik";
-import { Button } from "react-bootstrap";
+import { Form as FormikForm, Field } from "formik";
+import { Form, Button } from "react-bootstrap";
 
 const AddChannelForm = ({ errors, isSubmitting, onClose }) => (
-  <Form noValidate>
-    <div className="form-group">
+  <FormikForm noValidate>
+    <Form.Group className="form-group">
       <Field
         name="name"
         aria-label="name"
         className={`mb-2 form-control ${errors.name ? "is-invalid" : ""}`}
       />
-      <div className="d-block mb-2 invalid-feedback">{errors?.name}</div>
+      <Form.Control.Feedback type="invalid" className="mb-2">
+        {errors?.name}
+      </Form.Control.Feedback>
       <div className="d-flex justify-content-end">
         <Button className="mr-2" variant="secondary" onClick={onClose}>
           Cancel
         </Button>
-        <Button type="submit" variant="primary" disabled={isSubmitting}>
+        <Button type="submit" disabled={isSubmitting}>
           Submit
         </Button>
       </div>
-    </div>
-  </Form>
+    </Form.Group>
+  </FormikForm>
 );
 
 AddChannelForm.propTypes = {
