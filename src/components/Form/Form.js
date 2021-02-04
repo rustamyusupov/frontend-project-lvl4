@@ -21,6 +21,7 @@ const Form = ({ Component, onClose, onSubmit }) => {
     onSubmit(name);
     setSubmitting(false);
     resetForm();
+    onClose();
   };
 
   return (
