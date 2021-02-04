@@ -1,26 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "react-bootstrap";
 
 import { setCurrentChannel, create as createChannel } from "modules/Channels";
 import { getChannels } from "modules/Channels/selectors";
-import AddChannel from "components/AddChannel";
+import AddChannelForm from "components/AddChannelForm";
+import Form from "components/Form";
 import Modal from "components/Modal";
 import Navigation from "components/Navigation";
+
+const renderModal = ({ title, show, Component, onClose, onSubmit }) => (
+  <Modal
+    title={title}
+    show={show}
+    content={
+      <Form Component={Component} onClose={onClose} onSubmit={onSubmit} />
+    }
+    onClose={onClose}
+  />
+);
 
 const Sidebar = () => {
   const dispatch = useDispatch();
   const channels = useSelector(getChannels);
+  const [show, setShow] = useState("");
 
-  const handleAction = (type) => (id) => dispatch(showModal({ type, id }));
+  const handleShow = (name) => () => setShow(name);
+  const handleClose = () => setShow("");
   const handleChannelClick = (id) => dispatch(setCurrentChannel(id));
-
-  const handleClose = () => dispatch(hideModal());
-  const handleSubmit = (name) => dispatch(createChannel({ name }));
-
-  // 1. move modals to App
-  // 2. think about decomposition
-  // 3. show modals actions, content
+  const handleAdd = (name) => dispatch(createChannel({ name }));
+  const handleRename = (name) => console.log("rename", name); // action
+  const handleRemove = (name) => console.log("remove", name); // action
 
   return (
     <>
@@ -29,7 +39,7 @@ const Sidebar = () => {
         <Button
           variant="link"
           className="ml-auto p-0"
-          onClick={handleAction("add")}
+          onClick={handleShow("add")}
         >
           +
         </Button>
@@ -37,15 +47,31 @@ const Sidebar = () => {
       <Navigation
         items={channels}
         onClick={handleChannelClick}
-        onRename={handleAction("rename")}
-        onRemove={handleAction("remove")}
+        onRename={handleShow("rename")}
+        onRemove={handleShow("remove")}
       />
-      <Modal
-        title="Add channel"
-        show={show}
-        content={<AddChannel onClose={handleClose} onSubmit={handleSubmit} />}
-        onClose={handleClose}
-      />
+      {renderModal({
+        title: "Add channel",
+        show: show === "add",
+        Component: AddChannelForm,
+        onClose: handleClose,
+        onSubmit: handleAdd,
+      })}
+      {renderModal({
+        // initialValues
+        title: "Rename channel",
+        show: show === "rename",
+        Component: AddChannelForm,
+        onClose: handleClose,
+        onSubmit: handleRename,
+      })}
+      {renderModal({
+        title: "Remove channel",
+        show: show === "remove",
+        Component: AddChannelForm,
+        onClose: handleClose,
+        onSubmit: handleRemove,
+      })}
     </>
   );
 };
