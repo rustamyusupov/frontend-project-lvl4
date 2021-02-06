@@ -13,7 +13,7 @@ const initialValues = {
 
 const InputForm = () => {
   const dispatch = useDispatch();
-  const activeChannel = useSelector(getCurrentChannel);
+  const { id } = useSelector(getCurrentChannel);
   const userName = useUser();
 
   const handleSubmit = async (
@@ -21,7 +21,7 @@ const InputForm = () => {
     { setFieldError, resetForm, setSubmitting }
   ) => {
     const response = await dispatch(
-      createMessage({ channel: activeChannel, userName, text: message })
+      createMessage({ channel: id, userName, text: message })
     );
 
     setSubmitting(false);
