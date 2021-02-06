@@ -32,17 +32,18 @@ const renderGroup = (props) => (
 
 const Navigation = ({ items, onClick, onRename, onRemove }) => {
   const handleClick = (id) => () => onClick(id);
-  const handleRename = (id) => () => onRename(id);
-  const handleRemove = (id) => () => onRemove(id);
+  const handleRename = (props) => () => onRename({ ...props });
+  const handleRemove = (props) => () => onRemove({ ...props });
 
   return (
     <ul className="nav flex-column nav-pills nav-fill">
-      {items.map(({ id, removable, ...rest }) => {
+      {items.map(({ id, name, removable, ...rest }) => {
         const props = {
+          name,
           removable,
           onClick: handleClick(id),
-          onRename: handleRename(id),
-          onRemove: handleRemove(id),
+          onRename: handleRename({ id, name }),
+          onRemove: handleRemove({ id, name }),
           ...rest,
         };
 
