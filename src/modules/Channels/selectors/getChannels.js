@@ -7,7 +7,9 @@ const getChannels = createSelector(
   get("channels.items"),
   getCurrentChannel,
   (items, current) =>
-    map(({ id, ...rest }) => ({ id, active: id === current, ...rest }))(items)
+    map(({ id, ...rest }) => ({ id, active: id === current.id, ...rest }))(
+      items
+    )
 );
 
 export default getChannels;
