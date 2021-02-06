@@ -33,7 +33,7 @@ const Popup = ({ type }) => {
 
   const show = modal.show && modal.type === type;
   const { Component, title, onSubmit } = map[type];
-  const initialValues = { ...modal.data };
+  const initialValues = { name: modal.data?.name ?? "" };
 
   const handleClose = () => dispatch(hide());
   const handleSubmit = (name) => dispatch(onSubmit({ name, ...modal.data }));
