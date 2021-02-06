@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Formik } from "formik";
 
@@ -14,7 +14,12 @@ const initialValues = {
 const InputForm = () => {
   const dispatch = useDispatch();
   const { id } = useSelector(getCurrentChannel);
+  const inputEl = useRef(null);
   const userName = useUser();
+
+  useEffect(() => {
+    inputEl.current?.focus();
+  }, [id]);
 
   const handleSubmit = async (
     { message },
@@ -32,14 +37,13 @@ const InputForm = () => {
     }
 
     resetForm();
+    inputEl.current?.focus();
   };
 
   return (
-    <Formik
-      component={MessageForm}
-      initialValues={initialValues}
-      onSubmit={handleSubmit}
-    />
+    <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+      {(props) => <MessageForm ref={inputEl} {...props} />}
+    </Formik>
   );
 };
 

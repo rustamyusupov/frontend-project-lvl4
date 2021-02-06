@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Form as FormikForm, Field } from "formik";
 import { Form, InputGroup, Button } from "react-bootstrap";
 
-const MessageForm = ({ errors, isSubmitting }) => (
+const MessageForm = React.forwardRef(({ errors, isSubmitting }, ref) => (
   <FormikForm noValidate>
     <Form.Group>
       <InputGroup>
@@ -11,6 +11,7 @@ const MessageForm = ({ errors, isSubmitting }) => (
           name="message"
           aria-label="message"
           className={`mr-2 form-control ${errors.message ? "is-invalid" : ""}`}
+          innerRef={ref}
         />
         <Button type="submit" disabled={isSubmitting}>
           Submit
@@ -21,7 +22,7 @@ const MessageForm = ({ errors, isSubmitting }) => (
       </InputGroup>
     </Form.Group>
   </FormikForm>
-);
+));
 
 MessageForm.propTypes = {
   errors: PropTypes.shape({
