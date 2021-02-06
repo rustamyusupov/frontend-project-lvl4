@@ -8,7 +8,7 @@ import io from "socket.io-client";
 
 import "../assets/application.scss";
 import configureStore from "redux/configureStore";
-import { addChannel } from "modules/Channels";
+import { addChannel, removeChannel } from "modules/Channels";
 import { addMessage } from "modules/Messages";
 import { UserProvider } from "modules/User/context";
 import App from "containers/App";
@@ -36,11 +36,8 @@ if (process.env.NODE_ENV !== "production") {
   localStorage.debug = "chat:*";
 }
 
-socket.on("newChannel", ({ attributes }) =>
-  store.dispatch(addChannel(attributes))
-);
-socket.on("newMessage", ({ attributes }) =>
-  store.dispatch(addMessage(attributes))
-);
+socket.on("newChannel", (data) => store.dispatch(addChannel(data)));
+socket.on("removeChannel", (data) => store.dispatch(removeChannel(data)));
+socket.on("newMessage", (data) => store.dispatch(addMessage(data)));
 
 render();
