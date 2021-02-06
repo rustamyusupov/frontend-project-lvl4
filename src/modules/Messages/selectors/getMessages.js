@@ -7,7 +7,7 @@ const getMessages = createSelector(
   get("messages.items"),
   getCurrentChannel,
   (items, currentChannel) =>
-    filter(({ channelId, ...rest }) => channelId === currentChannel)(items)
+    filter(({ channelId }) => channelId === currentChannel.id)(items)
 );
 
 export default getMessages;
