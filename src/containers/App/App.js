@@ -3,6 +3,7 @@ import { Row, Col } from "react-bootstrap";
 
 import InputForm from "containers/InputForm";
 import MessageBox from "containers/MessageBox";
+import Popup from "containers/Popup";
 import Sidebar from "containers/Sidebar";
 
 const App = () => (
@@ -20,6 +21,9 @@ const App = () => (
         </div>
       </div>
     </Col>
+    <Popup type="add" />
+    <Popup type="rename" />
+    <Popup type="remove" />
   </Row>
 );
 
