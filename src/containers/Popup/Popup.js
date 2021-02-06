@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 
-import { create } from "modules/Channels";
+import { create, rename, remove } from "modules/Channels";
 import { hide } from "modules/Modal";
 import { getCurrent } from "modules/Modal/selectors";
 import AddChannelForm from "components/AddChannelForm";
@@ -18,12 +18,12 @@ const map = {
   rename: {
     Component: AddChannelForm,
     title: "Rename channel",
-    onSubmit: create,
+    onSubmit: rename,
   },
   remove: {
     Component: AddChannelForm,
     title: "Remove channel",
-    onSubmit: create,
+    onSubmit: remove,
   },
 };
 
@@ -36,7 +36,7 @@ const Popup = ({ type }) => {
   const initialValues = { ...modal.data };
 
   const handleClose = () => dispatch(hide());
-  const handleSubmit = (name) => dispatch(onSubmit({ name }));
+  const handleSubmit = (name) => dispatch(onSubmit({ name, ...modal.data }));
 
   return (
     <Modal
