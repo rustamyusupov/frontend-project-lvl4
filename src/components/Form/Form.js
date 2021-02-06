@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Formik } from "formik";
 
-const initialValues = {
+const defaultInitialValues = {
   name: "",
 };
 
@@ -16,7 +16,12 @@ const validate = (values) => {
   return errors;
 };
 
-const Form = ({ Component, onClose, onSubmit }) => {
+const Form = ({
+  Component,
+  initialValues = defaultInitialValues,
+  onClose,
+  onSubmit,
+}) => {
   const handleSubmit = ({ name }, { resetForm, setSubmitting }) => {
     onSubmit(name);
     setSubmitting(false);
