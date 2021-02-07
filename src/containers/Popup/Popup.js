@@ -8,6 +8,7 @@ import { create, rename, remove } from "modules/Channels";
 import { hide } from "modules/Modal";
 import { getCurrent } from "modules/Modal/selectors";
 import AddChannelForm from "components/AddChannelForm";
+import RemoveChannelForm from "components/RemoveChannelForm";
 import Modal from "components/Modal";
 
 const map = {
@@ -22,7 +23,7 @@ const map = {
     onSubmit: rename,
   },
   remove: {
-    Component: AddChannelForm,
+    Component: RemoveChannelForm,
     title: "Remove channel",
     onSubmit: remove,
   },
