@@ -1,12 +1,12 @@
 /* eslint-disable consistent-return */
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const create = createAsyncThunk(
+const rename = createAsyncThunk(
   "channels/rename",
-  async ({ name }, { extra: { request } }) => {
-    const url = `/api/v1/channels`;
+  async ({ id, name }, { extra: { request } }) => {
+    const url = `/api/v1/channels/${id}`;
     const options = {
-      method: "post",
+      method: "patch",
       data: { attributes: { name } },
     };
 
@@ -14,4 +14,4 @@ const create = createAsyncThunk(
   }
 );
 
-export default create;
+export default rename;
