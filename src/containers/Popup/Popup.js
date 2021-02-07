@@ -47,9 +47,14 @@ const Popup = ({ type }) => {
   }, [show]);
 
   const handleClose = () => dispatch(hide());
-  const handleSubmit = ({ name }) => {
-    dispatch(onSubmit({ id: modal.data?.id, name }));
-    dispatch(hide());
+  const handleSubmit = async ({ name }, { setSubmitting }) => {
+    const response = await dispatch(onSubmit({ id: modal.data?.id, name }));
+
+    setSubmitting(false);
+
+    if (!response.error) {
+      dispatch(hide());
+    }
   };
 
   return (
