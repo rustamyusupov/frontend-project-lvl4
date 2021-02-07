@@ -8,7 +8,7 @@ import io from "socket.io-client";
 
 import "../assets/application.scss";
 import configureStore from "redux/configureStore";
-import { addChannel, removeChannel } from "modules/Channels";
+import { addChannel, removeChannel, renameChannel } from "modules/Channels";
 import { addMessage } from "modules/Messages";
 import { UserProvider } from "modules/User/context";
 import App from "containers/App";
@@ -38,6 +38,7 @@ if (process.env.NODE_ENV !== "production") {
 
 socket.on("newChannel", (data) => store.dispatch(addChannel(data)));
 socket.on("removeChannel", (data) => store.dispatch(removeChannel(data)));
+socket.on("renameChannel", (data) => store.dispatch(renameChannel(data)));
 socket.on("newMessage", (data) => store.dispatch(addMessage(data)));
 
 render();
