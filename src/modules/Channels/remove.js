@@ -4,7 +4,7 @@ import { removeMessages } from "modules/Messages";
 import { setCurrentChannel } from "modules/Channels";
 import { getCurrentChannel } from "modules/Channels/selectors";
 
-const create = createAsyncThunk(
+const remove = createAsyncThunk(
   "channels/remove",
   async ({ id }, { dispatch, getState, extra: { request } }) => {
     const state = getState();
@@ -24,4 +24,4 @@ const create = createAsyncThunk(
   }
 );
 
-export default create;
+export default remove;
