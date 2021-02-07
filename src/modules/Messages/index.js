@@ -13,6 +13,11 @@ const messages = createSlice({
     addMessage: (state, action) => {
       state.items.push(action.payload.attributes);
     },
+    removeMessages: (state, action) => {
+      state.items = state.items.filter(
+        ({ channelId }) => channelId !== action.payload
+      );
+    },
   },
   extraReducers: {
     [create.rejected]: (state, action) => {
@@ -23,6 +28,6 @@ const messages = createSlice({
 
 export { default as create } from "./thunk";
 
-export const { addMessage } = messages.actions;
+export const { addMessage, removeMessages } = messages.actions;
 
 export default messages.reducer;
