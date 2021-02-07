@@ -7,25 +7,30 @@ import validate from "utils/validate";
 import { create, rename, remove } from "modules/Channels";
 import { hide } from "modules/Modal";
 import { getCurrent } from "modules/Modal/selectors";
-import AddChannelForm from "components/AddChannelForm";
-import RemoveChannelForm from "components/RemoveChannelForm";
+import ActionForm from "components/ActionForm";
 import Modal from "components/Modal";
 
 const map = {
   add: {
-    Component: AddChannelForm,
+    action: "Submit",
+    button: "primary",
+    input: true,
     title: "Add channel",
     onSubmit: create,
   },
-  rename: {
-    Component: AddChannelForm,
-    title: "Rename channel",
-    onSubmit: rename,
-  },
   remove: {
-    Component: RemoveChannelForm,
+    action: "Confirm",
+    button: "danger",
+    input: false,
     title: "Remove channel",
     onSubmit: remove,
+  },
+  rename: {
+    action: "Submit",
+    button: "primary",
+    input: true,
+    title: "Rename channel",
+    onSubmit: rename,
   },
 };
 
@@ -35,7 +40,7 @@ const Popup = ({ type }) => {
   const inputEl = useRef(null);
 
   const show = modal.show && modal.type === type;
-  const { Component, title, onSubmit } = map[type];
+  const { title, onSubmit, ...rest } = map[type];
 
   useEffect(() => {
     inputEl.current?.focus();
@@ -43,7 +48,7 @@ const Popup = ({ type }) => {
 
   const handleClose = () => dispatch(hide());
   const handleSubmit = ({ name }) => {
-    dispatch(onSubmit({ name, ...modal.data }));
+    dispatch(onSubmit({ id: modal.data?.id, name }));
     dispatch(hide());
   };
 
@@ -58,7 +63,13 @@ const Popup = ({ type }) => {
           onSubmit={handleSubmit}
         >
           {(props) => (
-            <Component ref={inputEl} onClose={handleClose} {...props} />
+            <ActionForm
+              type={type}
+              ref={inputEl}
+              onClose={handleClose}
+              {...props}
+              {...rest}
+            />
           )}
         </Formik>
       }
