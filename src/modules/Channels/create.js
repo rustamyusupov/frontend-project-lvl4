@@ -1,10 +1,12 @@
 /* eslint-disable consistent-return */
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+import routes from "routes";
+
 const create = createAsyncThunk(
   "channels/create",
   async ({ name }, { extra: { request } }) => {
-    const url = `/api/v1/channels`;
+    const url = routes.channelsPath();
     const options = {
       method: "post",
       data: { attributes: { name } },
