@@ -1,5 +1,5 @@
 # Slack
-[![Maintainability](https://api.codeclimate.com/v1/badges/cd804baf8cdf9690dea4/maintainability)](https://codeclimate.com/github/rustamyusupov/slack/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/652785bfca16aa1eeabd/maintainability)](https://codeclimate.com/github/rustamyusupov/frontend-project-lvl4/maintainability)
 [![Actions Status](https://github.com/rustamyusupov/frontend-project-lvl4/workflows/hexlet-check/badge.svg)](https://github.com/rustamyusupov/frontend-project-lvl4/actions)
 
 ## Install
