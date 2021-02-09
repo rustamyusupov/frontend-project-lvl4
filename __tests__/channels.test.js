@@ -37,10 +37,8 @@ test('get /channels', async () => {
 
 test('post /channels', async () => {
   const payload = {
-    data: {
-      attributes: {
-        name: 'custom',
-      },
+    attributes: {
+      name: 'custom',
     },
   };
   const app = buildApp({ port: 5000 });
@@ -52,13 +50,12 @@ test('post /channels', async () => {
   expect(response.statusCode).toEqual(201);
 
   const expected = {
-    data: {
-      type: 'channels',
-      attributes: {
-        removable: true,
-        name: 'custom',
-      },
+    type: 'channels',
+    attributes: {
+      removable: true,
+      name: 'custom',
     },
+
   };
 
   expect(JSON.parse(response.payload)).toMatchObject(expected);
@@ -88,11 +85,10 @@ test('patch /channels/:id', async () => {
   const app = buildApp({ state });
 
   const payload = {
-    data: {
-      attributes: {
-        name: 'zazaza',
-      },
+    attributes: {
+      name: 'zazaza',
     },
+
   };
   const response = await app.inject({
     method: 'PATCH',

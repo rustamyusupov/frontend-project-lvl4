@@ -49,10 +49,8 @@ test('post /channels/:id/messages', async () => {
   const app = buildApp({ state });
 
   const payload = {
-    data: {
-      attributes: {
-        body: 'egegey',
-      },
+    attributes: {
+      body: 'egegey',
     },
   };
   const response = await app.inject({
@@ -63,12 +61,11 @@ test('post /channels/:id/messages', async () => {
   expect(response.statusCode).toEqual(201);
 
   const expected = {
-    data: {
-      type: 'messages',
-      attributes: {
-        body: 'egegey',
-      },
+    type: 'messages',
+    attributes: {
+      body: 'egegey',
     },
+
   };
 
   expect(JSON.parse(response.payload)).toMatchObject(expected);
