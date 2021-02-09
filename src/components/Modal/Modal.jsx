@@ -1,8 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Modal as ModalKit } from "react-bootstrap";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Modal as ModalKit } from 'react-bootstrap';
 
-const Modal = ({ content, show, title, onClose }) => (
+const Modal = ({
+  content, show, title, onClose,
+}) => (
   <ModalKit show={show} onHide={onClose}>
     <ModalKit.Header closeButton>
       <ModalKit.Title>{title}</ModalKit.Title>

@@ -1,14 +1,14 @@
-import React from "react";
-import { Row, Col } from "react-bootstrap";
+import React from 'react';
+import { Row, Col } from 'react-bootstrap';
 
-import InputForm from "containers/InputForm";
-import MessageBox from "containers/MessageBox";
-import Popup from "containers/Popup";
-import Sidebar from "containers/Sidebar";
+import InputForm from 'containers/InputForm';
+import MessageBox from 'containers/MessageBox';
+import Popup from 'containers/Popup';
+import Sidebar from 'containers/Sidebar';
 
 const App = () => (
   <Row className="h-100 pb-3">
-    <Col xs="3" className="border-right" style={{ minWidth: "110px" }}>
+    <Col xs="3" className="border-right" style={{ minWidth: '110px' }}>
       <Sidebar />
     </Col>
     <Col className="h-100">

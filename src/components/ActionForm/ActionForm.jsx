@@ -1,26 +1,28 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Form as FormikForm, Field } from "formik";
-import { Form, Button } from "react-bootstrap";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Form as FormikForm, Field } from 'formik';
+import { Form, Button } from 'react-bootstrap';
 
 const ActionForm = React.forwardRef(
-  ({ action, button, errors, input, isSubmitting, touched, onClose }, ref) => (
+  ({
+    action, button, errors, input, isSubmitting, touched, onClose,
+  }, ref) => (
     <FormikForm noValidate>
       <Form.Group className="form-group">
         {input && (
-          <>
-            <Field
-              name="name"
-              aria-label="name"
-              className={`mb-2 form-control ${
-                touched.name && errors.name ? "is-invalid" : ""
-              }`}
-              innerRef={ref}
-            />
-            <Form.Control.Feedback type="invalid" className="mb-2">
-              {touched.name && errors?.name}
-            </Form.Control.Feedback>
-          </>
+        <>
+          <Field
+            name="name"
+            aria-label="name"
+            className={`mb-2 form-control ${
+              touched.name && errors.name ? 'is-invalid' : ''
+            }`}
+            innerRef={ref}
+          />
+          <Form.Control.Feedback type="invalid" className="mb-2">
+            {touched.name && errors?.name}
+          </Form.Control.Feedback>
+        </>
         )}
         <div className="d-flex justify-content-end">
           <Button className="mr-2" variant="secondary" onClick={onClose}>
@@ -32,7 +34,7 @@ const ActionForm = React.forwardRef(
         </div>
       </Form.Group>
     </FormikForm>
-  )
+  ),
 );
 
 ActionForm.propTypes = {

@@ -1,8 +1,8 @@
-import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 
-import request from "utils/request";
+import request from 'utils/request';
 
-import reducer from "./reducers";
+import reducer from './reducers';
 
 const configureAppStore = (initialState = {}) => {
   const defaultMiddleware = getDefaultMiddleware({
@@ -13,7 +13,7 @@ const configureAppStore = (initialState = {}) => {
     },
   });
   const middleware = [...defaultMiddleware];
-  const isDev = process.env.NODE_ENV !== "production";
+  const isDev = process.env.NODE_ENV !== 'production';
 
   const store = configureStore({
     reducer,
@@ -23,7 +23,7 @@ const configureAppStore = (initialState = {}) => {
   });
 
   if (module.hot && isDev) {
-    module.hot.accept("./reducers", () => store.replaceReducer(reducer));
+    module.hot.accept('./reducers', () => store.replaceReducer(reducer));
   }
 
   return store;

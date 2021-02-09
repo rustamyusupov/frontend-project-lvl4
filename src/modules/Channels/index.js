@@ -1,8 +1,8 @@
 /* eslint-disable no-param-reassign */
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const channels = createSlice({
-  name: "channels",
+  name: 'channels',
   initialState: {
     currentChannelId: 1,
     items: [],
@@ -27,9 +27,9 @@ const channels = createSlice({
   },
 });
 
-export { default as create } from "./create";
-export { default as rename } from "./rename";
-export { default as remove } from "./remove";
+export { default as create } from './create';
+export { default as rename } from './rename';
+export { default as remove } from './remove';
 
 export const {
   setCurrentChannel,

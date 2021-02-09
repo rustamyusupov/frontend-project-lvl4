@@ -1,13 +1,13 @@
 /* eslint-disable no-param-reassign */
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   show: false,
-  type: "",
+  type: '',
 };
 
 const modal = createSlice({
-  name: "modal",
+  name: 'modal',
   initialState,
   reducers: {
     show: (state, action) => {

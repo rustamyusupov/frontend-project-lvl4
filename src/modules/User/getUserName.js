@@ -1,8 +1,8 @@
-import cookie from "js-cookie";
-import faker from "faker";
+import cookie from 'js-cookie';
+import faker from 'faker';
 
 const getUserName = () => {
-  const cookieName = cookie.get("name");
+  const cookieName = cookie.get('name');
 
   if (cookieName) {
     return cookieName;
@@ -10,7 +10,7 @@ const getUserName = () => {
 
   const newName = faker.internet.userName();
 
-  cookie.set("name", newName);
+  cookie.set('name', newName);
 
   return newName;
 };

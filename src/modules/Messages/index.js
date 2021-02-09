@@ -1,13 +1,13 @@
 /* eslint-disable no-param-reassign */
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
-import create from "./thunk";
+import create from './thunk';
 
 const messages = createSlice({
-  name: "messages",
+  name: 'messages',
   initialState: {
     items: [],
-    error: "",
+    error: '',
   },
   reducers: {
     addMessage: (state, action) => {
@@ -15,7 +15,7 @@ const messages = createSlice({
     },
     removeMessages: (state, action) => {
       state.items = state.items.filter(
-        ({ channelId }) => channelId !== action.payload
+        ({ channelId }) => channelId !== action.payload,
       );
     },
   },
@@ -26,7 +26,7 @@ const messages = createSlice({
   },
 });
 
-export { default as create } from "./thunk";
+export { default as create } from './thunk';
 
 export const { addMessage, removeMessages } = messages.actions;
 

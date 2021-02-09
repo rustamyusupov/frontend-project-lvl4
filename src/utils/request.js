@@ -1,5 +1,5 @@
-import axios from "axios";
-import { get } from "lodash/fp";
+import axios from 'axios';
+import { get } from 'lodash/fp';
 
 const successfulResponses = 200;
 const noContent = 204;
@@ -8,8 +8,8 @@ const redirectionMessages = 300;
 
 const checkStatus = (response) => {
   if (
-    response.status >= successfulResponses &&
-    response.status < redirectionMessages
+    response.status >= successfulResponses
+    && response.status < redirectionMessages
   ) {
     return response;
   }
@@ -25,10 +25,9 @@ const parse = (response) => {
     return null;
   }
 
-  return get("data")(response);
+  return get('data')(response);
 };
 
-const request = (url, options) =>
-  axios(url, options).then(checkStatus).then(parse);
+const request = (url, options) => axios(url, options).then(checkStatus).then(parse);
 
 export default request;

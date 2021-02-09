@@ -1,13 +1,17 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { NavItem, Button, ButtonGroup, Dropdown } from "react-bootstrap";
+import React from 'react';
+import PropTypes from 'prop-types';
+import {
+  NavItem, Button, ButtonGroup, Dropdown,
+} from 'react-bootstrap';
 
-const renderButton = ({ active, name, removable, onClick }) => (
+const renderButton = ({
+  active, name, removable, onClick,
+}) => (
   <Button
     type="button"
-    variant={active ? "primary" : "light"}
+    variant={active ? 'primary' : 'light'}
     className={`text-left btn-block shadow-none${
-      removable ? " flex-grow-1" : " mb-2"
+      removable ? ' flex-grow-1' : ' mb-2'
     }`}
     onClick={onClick}
   >
@@ -19,7 +23,7 @@ const renderGroup = (props) => (
   <Dropdown as={ButtonGroup} className="btn-block mb-2">
     {renderButton(props)}
     <Dropdown.Toggle
-      variant={props.active ? "primary" : "light"}
+      variant={props.active ? 'primary' : 'light'}
       className="flex-grow-0 shadow-none"
       split
     />
@@ -30,14 +34,18 @@ const renderGroup = (props) => (
   </Dropdown>
 );
 
-const Navigation = ({ items, onClick, onRename, onRemove }) => {
+const Navigation = ({
+  items, onClick, onRename, onRemove,
+}) => {
   const handleClick = (id) => () => onClick(id);
   const handleRename = (props) => () => onRename({ ...props });
   const handleRemove = (props) => () => onRemove({ ...props });
 
   return (
     <ul className="nav flex-column nav-pills nav-fill">
-      {items.map(({ id, name, removable, ...rest }) => {
+      {items.map(({
+        id, name, removable, ...rest
+      }) => {
         const props = {
           name,
           removable,
@@ -64,7 +72,7 @@ Navigation.propTypes = {
       active: PropTypes.bool,
       name: PropTypes.string,
       removable: PropTypes.bool,
-    })
+    }),
   ),
   onClick: PropTypes.func,
   onRename: PropTypes.func,
