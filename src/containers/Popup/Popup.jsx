@@ -6,7 +6,7 @@ import { Formik } from 'formik';
 import validate from 'utils/validate';
 import { create, rename, remove } from 'modules/Channels';
 import { hide } from 'modules/Modal';
-import { getCurrent } from 'modules/Modal/selectors';
+import getCurrent from 'modules/Modal/selectors';
 import ActionForm from 'components/ActionForm';
 import Modal from 'components/Modal';
 

@@ -1,1 +1,1 @@
-export { default as getCurrent } from './getCurrent';
+export { default } from './getCurrent';

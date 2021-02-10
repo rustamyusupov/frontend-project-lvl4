@@ -25,6 +25,8 @@ const MessageForm = React.forwardRef(({ errors, isSubmitting }, ref) => (
   </FormikForm>
 ));
 
+MessageForm.displayName = 'MessageForm';
+
 MessageForm.propTypes = {
   errors: PropTypes.shape({
     message: PropTypes.string,

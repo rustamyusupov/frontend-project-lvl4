@@ -10,19 +10,18 @@ const ActionForm = React.forwardRef(
     <FormikForm noValidate>
       <Form.Group className="form-group">
         {input && (
-        <>
-          <Field
-            name="name"
-            aria-label="name"
-            className={`mb-2 form-control ${
-              touched.name && errors.name ? 'is-invalid' : ''
-            }`}
-            innerRef={ref}
-          />
-          <Form.Control.Feedback type="invalid" className="mb-2">
-            {touched.name && errors?.name}
-          </Form.Control.Feedback>
-        </>
+          <>
+            <Field
+              name="name"
+              aria-label="name"
+              className={`mb-2 form-control ${touched.name && errors.name ? 'is-invalid' : ''
+                }`}
+              innerRef={ref}
+            />
+            <Form.Control.Feedback type="invalid" className="mb-2">
+              {touched.name && errors?.name}
+            </Form.Control.Feedback>
+          </>
         )}
         <div className="d-flex justify-content-end">
           <Button className="mr-2" variant="secondary" onClick={onClose}>
@@ -36,6 +35,8 @@ const ActionForm = React.forwardRef(
     </FormikForm>
   ),
 );
+
+ActionForm.displayName = 'ActionForm';
 
 ActionForm.propTypes = {
   action: PropTypes.string.isRequired,
@@ -51,7 +52,7 @@ ActionForm.propTypes = {
 ActionForm.defaultProps = {
   errors: {},
   isSubmitting: false,
-  onClose: () => {},
+  onClose: () => { },
 };
 
 export default ActionForm;
