@@ -14,8 +14,9 @@ const ActionForm = React.forwardRef(
             <Field
               name="name"
               aria-label="name"
-              className={`mb-2 form-control ${touched.name && errors.name ? 'is-invalid' : ''
-                }`}
+              className={
+                `mb-2 form-control ${touched.name && errors.name ? 'is-invalid' : ''}`
+              }
               innerRef={ref}
             />
             <Form.Control.Feedback type="invalid" className="mb-2">
