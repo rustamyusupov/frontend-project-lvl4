@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik } from 'formik';
 
+import validate from 'utils/validate';
 import { getCurrentChannel } from 'modules/Channels/selectors';
 import { create as createMessage } from 'modules/Messages';
 import { useUser } from 'modules/User/context';
@@ -42,8 +43,8 @@ const InputForm = () => {
 
   return (
     <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-      {({ errors, isSubmitting }) => (
-        <MessageForm errors={errors} isSubmitting={isSubmitting} ref={inputEl} />
+      {({ dirty, errors, isSubmitting }) => (
+        <MessageForm disabled={isSubmitting || !dirty} errors={errors} ref={inputEl} />
       )}
     </Formik>
   );
