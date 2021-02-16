@@ -10,7 +10,7 @@ const renderButton = ({
   <Button
     type="button"
     variant={active ? 'primary' : 'light'}
-    className={`text-left btn-block shadow-none${
+    className={`nav-link text-left btn-block shadow-none${
       removable ? ' flex-grow-1' : ' mb-2'
     }`}
     onClick={onClick}
