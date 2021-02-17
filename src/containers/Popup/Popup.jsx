@@ -49,12 +49,14 @@ const Popup = ({ type }) => {
   }, [show]);
 
   const handleClose = () => dispatch(hide());
-  const handleSubmit = async ({ name }, { setSubmitting }) => {
+  const handleSubmit = async ({ name }, { setFieldError, setSubmitting }) => {
     const response = await dispatch(onSubmit({ id: modal.data?.id, name }));
 
     setSubmitting(false);
 
-    if (!response.error) {
+    if (response.error) {
+      setFieldError('name', response.error?.message, false);
+    } else {
       dispatch(hide());
     }
   };
