@@ -2,7 +2,6 @@ import React, { useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik } from 'formik';
 
-import validate from 'utils/validate';
 import { getCurrentChannel } from 'modules/Channels/selectors';
 import { create as createMessage } from 'modules/Messages';
 import { useUser } from 'modules/User/context';
