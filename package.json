@@ -9,10 +9,10 @@
     "node": ">= 14"
   },
   "scripts": {
-    "start": "NODE_ENV=production node dist/bin/slack.js",
-    "prebuild": "rm -rf dist",
-    "build-server": "NODE_ENV=production babel server --out-dir dist --source-maps inline && cp -r server/views dist/views",
-    "build-app": "NODE_ENV=production npx webpack --mode production",
+    "start": "cross-env NODE_ENV=production node dist/bin/slack.js",
+    "prebuild": "rimraf dist",
+    "build-server": "cross-env NODE_ENV=production babel server --out-dir dist --source-maps inline && cp -r server/views dist/views",
+    "build-app": "cross-env NODE_ENV=production npx webpack --mode production",
     "build": "npm run build-app && npm run build-server",
     "postinstall": "npm run build",
     "test": "jest"
@@ -70,6 +70,7 @@
     "@types/jest": "^26.0.15",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.6.3",
+    "cross-env": "^7.0.3",
     "eslint": "^7.14.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-import-resolver-webpack": "^0.13.0",
@@ -80,6 +81,7 @@
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.2.0",
     "jest": "^26.6.3",
-    "jest-cli": "^26.6.3"
+    "jest-cli": "^26.6.3",
+    "rimraf": "^3.0.2"
   }
 }
