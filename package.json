@@ -1,7 +1,7 @@
 {
   "name": "@hexlet/code",
   "version": "0.0.1",
-  "description": "",
+  "description": "a test project like slack",
   "author": "Rustam Yusupov",
   "license": "ISC",
   "main": "server/index.js",
