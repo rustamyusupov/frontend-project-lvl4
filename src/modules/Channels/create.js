@@ -1,4 +1,3 @@
-/* eslint-disable consistent-return */
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import routes from 'routes';
