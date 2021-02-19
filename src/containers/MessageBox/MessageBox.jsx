@@ -8,7 +8,7 @@ const MessageBox = () => {
   const tagRef = useRef(null);
   const messages = useSelector(getMessages);
 
-  const scrollToBottom = () => tagRef.current?.scrollIntoView({ behavior: 'smooth' });
+  const scrollToBottom = () => tagRef.current?.scrollIntoView();
 
   useEffect(() => {
     const id = setTimeout(() => scrollToBottom(), 0);
