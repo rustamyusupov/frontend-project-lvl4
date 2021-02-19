@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Formik } from 'formik';
 
 import validate from 'utils/validate';
-import { create, rename, remove } from 'modules/Channels';
-import { hide } from 'modules/Modal';
+import { createChannel, renameChannel, removeChannel } from 'modules/Channels/slice';
+import { modalActions } from 'modules/Modal/slice';
 import getCurrent from 'modules/Modal/selectors';
 import ActionForm from 'components/ActionForm';
 import Modal from 'components/Modal';
@@ -16,21 +16,21 @@ const map = {
     button: 'primary',
     input: true,
     title: 'Add channel',
-    onSubmit: create,
+    onSubmit: createChannel,
   },
   remove: {
     action: 'Confirm',
     button: 'danger',
     input: false,
     title: 'Remove channel',
-    onSubmit: remove,
+    onSubmit: removeChannel,
   },
   rename: {
     action: 'Submit',
     button: 'primary',
     input: true,
     title: 'Rename channel',
-    onSubmit: rename,
+    onSubmit: renameChannel,
   },
 };
 
@@ -48,7 +48,7 @@ const Popup = ({ type }) => {
     inputEl.current?.focus();
   }, [show]);
 
-  const handleClose = () => dispatch(hide());
+  const handleClose = () => dispatch(modalActions.hide());
   const handleSubmit = async ({ name }, { setFieldError, setSubmitting }) => {
     const response = await dispatch(onSubmit({ id: modal.data?.id, name }));
 
@@ -57,7 +57,7 @@ const Popup = ({ type }) => {
     if (response.error) {
       setFieldError('name', response.error?.message, false);
     } else {
-      dispatch(hide());
+      dispatch(modalActions.hide());
     }
   };
 

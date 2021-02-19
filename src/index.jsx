@@ -8,8 +8,8 @@ import io from 'socket.io-client';
 
 import '../assets/application.scss';
 import configureStore from 'redux/configureStore';
-import { addChannel, removeChannel, renameChannel } from 'modules/Channels';
-import { addMessage } from 'modules/Messages';
+import { channelActions } from 'modules/Channels/slice';
+import { messagesActions } from 'modules/Messages/slice';
 import { UserProvider } from 'modules/User/context';
 import App from 'containers/App';
 
@@ -20,6 +20,7 @@ const initialState = {
 const store = configureStore(initialState);
 const mountNode = document.getElementById('chat');
 const socket = io();
+const { addChannel, removeChannel, renameChannel } = channelActions;
 
 const render = () => {
   ReactDOM.render(
@@ -39,6 +40,6 @@ if (process.env.NODE_ENV !== 'production') {
 socket.on('newChannel', (data) => store.dispatch(addChannel(data)));
 socket.on('removeChannel', (data) => store.dispatch(removeChannel(data)));
 socket.on('renameChannel', (data) => store.dispatch(renameChannel(data)));
-socket.on('newMessage', (data) => store.dispatch(addMessage(data)));
+socket.on('newMessage', (data) => store.dispatch(messagesActions.addMessage(data)));
 
 render();

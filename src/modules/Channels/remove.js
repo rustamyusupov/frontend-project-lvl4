@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import routes from 'routes';
-import { removeMessages } from 'modules/Messages';
-import { setCurrentChannel } from 'modules/Channels';
+import { messagesActions } from 'modules/Messages/slice';
+import { channelActions } from 'modules/Channels/slice';
 import { getCurrentChannel } from 'modules/Channels/selectors';
 
 const remove = createAsyncThunk(
@@ -17,11 +17,11 @@ const remove = createAsyncThunk(
     };
 
     if (currentChannel.id === id) {
-      dispatch(setCurrentChannel(1));
+      dispatch(channelActions.setCurrentChannel(1));
     }
 
     await request(url, options);
-    dispatch(removeMessages(id));
+    dispatch(messagesActions.removeMessages(id));
   },
 );
 
