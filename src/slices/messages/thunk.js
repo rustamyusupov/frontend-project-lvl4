@@ -1,10 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import routes from 'routes';
-
 const create = createAsyncThunk(
   'messages/create',
-  async ({ channel, userName, text }, { extra: { request } }) => {
+  async ({ channel, userName, text }, { extra: { routes, request } }) => {
     const url = routes.channelMessagesPath(channel);
     const options = {
       method: 'post',
@@ -15,4 +13,4 @@ const create = createAsyncThunk(
   },
 );
 
-export default create;
+export default { create };

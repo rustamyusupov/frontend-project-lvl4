@@ -3,4 +3,4 @@ import { createSelector } from '@reduxjs/toolkit';
 
 const getMessages = createSelector(get('modal'), identity);
 
-export default getMessages;
+export default { getMessages };

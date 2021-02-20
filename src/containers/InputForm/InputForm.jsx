@@ -4,7 +4,7 @@ import { Formik } from 'formik';
 
 import { getCurrentChannel } from 'modules/Channels/selectors';
 import { createMessage } from 'modules/Messages/slice';
-import { useUser } from 'modules/User/context';
+import { useUser } from 'context';
 import MessageForm from 'components/MessageForm';
 
 const initialValues = {

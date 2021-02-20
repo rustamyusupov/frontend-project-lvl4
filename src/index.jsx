@@ -8,10 +8,10 @@ import io from 'socket.io-client';
 
 import '../assets/application.scss';
 import configureStore from 'redux/configureStore';
-import { channelActions } from 'modules/Channels/slice';
-import { messagesActions } from 'modules/Messages/slice';
-import { UserProvider } from 'modules/User/context';
+import { channelActions } from 'slices/channels';
+import { messageActions } from 'slices/messages';
 import App from 'containers/App';
+import { UserProvider } from './context';
 
 const initialState = {
   channels: { items: channels, currentChannelId },
@@ -40,6 +40,6 @@ if (process.env.NODE_ENV !== 'production') {
 socket.on('newChannel', (data) => store.dispatch(addChannel(data)));
 socket.on('removeChannel', (data) => store.dispatch(removeChannel(data)));
 socket.on('renameChannel', (data) => store.dispatch(renameChannel(data)));
-socket.on('newMessage', (data) => store.dispatch(messagesActions.addMessage(data)));
+socket.on('newMessage', (data) => store.dispatch(messageActions.addMessage(data)));
 
 render();

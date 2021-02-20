@@ -7,4 +7,10 @@ const getCurrentChannel = createSelector(
   (items, currentId) => find({ id: currentId })(items),
 );
 
-export default getCurrentChannel;
+const getChannels = createSelector(
+  get('channels.items'),
+  getCurrentChannel,
+  (items, current) => items.map(({ id, ...rest }) => ({ id, active: id === current.id, ...rest })),
+);
+
+export default { getChannels, getCurrentChannel };

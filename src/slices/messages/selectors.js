@@ -1,12 +1,12 @@
 import { get } from 'lodash/fp';
 import { createSelector } from '@reduxjs/toolkit';
 
-import { getCurrentChannel } from 'modules/Channels/selectors';
+import { channelSelectors } from 'slices/channels';
 
 const getMessages = createSelector(
   get('messages.items'),
-  getCurrentChannel,
+  channelSelectors.getCurrentChannel,
   (items, currentChannel) => items.filter(({ channelId }) => channelId === currentChannel.id),
 );
 
-export default getMessages;
+export default { getMessages };

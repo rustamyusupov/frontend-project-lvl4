@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 
-import channels from 'modules/Channels';
-import messages from 'modules/Messages';
-import modal from 'modules/Modal';
+import channels from 'slices/channels';
+import messages from 'slices/messages';
+import modal from 'slices/modal';
 
 const createReducer = combineReducers({ channels, messages, modal });
 

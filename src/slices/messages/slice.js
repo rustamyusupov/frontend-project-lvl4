@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 
-import create from './create';
+import create from './thunk';
 
 const messages = createSlice({
   name: 'messages',
@@ -26,8 +26,6 @@ const messages = createSlice({
   },
 });
 
-export { default as createMessage } from './create';
-
-export const messagesActions = { ...messages.actions };
+export const { actions } = messages;
 
 export default messages.reducer;

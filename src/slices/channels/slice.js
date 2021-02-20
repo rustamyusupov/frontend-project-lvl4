@@ -27,10 +27,6 @@ const channels = createSlice({
   },
 });
 
-export { default as createChannel } from './create';
-export { default as renameChannel } from './rename';
-export { default as removeChannel } from './remove';
-
-export const channelActions = { ...channels.actions };
+export const { actions } = channels;
 
 export default channels.reducer;
