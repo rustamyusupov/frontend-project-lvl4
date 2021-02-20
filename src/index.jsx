@@ -10,7 +10,7 @@ import '../assets/application.scss';
 import configureStore from 'redux/configureStore';
 import { channelActions } from 'slices/channels';
 import { messageActions } from 'slices/messages';
-import App from 'containers/App';
+import App from 'components/App';
 import { UserProvider } from './context';
 
 const initialState = {

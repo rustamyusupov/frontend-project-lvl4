@@ -1,10 +1,10 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 
-import InputForm from 'containers/InputForm';
-import MessageBox from 'containers/MessageBox';
-import Popup from 'containers/Popup';
-import Sidebar from 'containers/Sidebar';
+import Input from 'components/InputForm';
+import MessageBox from 'components/MessageBox';
+import Popup from 'components/Popup';
+import Sidebar from 'components/Sidebar';
 
 const App = () => (
   <Row className="h-100 pb-3">
@@ -17,7 +17,7 @@ const App = () => (
           <MessageBox />
         </div>
         <div className="mt-auto">
-          <InputForm />
+          <Input />
         </div>
       </div>
     </Col>

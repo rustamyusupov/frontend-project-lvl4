@@ -2,14 +2,13 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'react-bootstrap';
 
-import { channelActions } from 'modules/Channels/slice';
-import { getChannels } from 'modules/Channels/selectors';
-import { modalActions } from 'modules/Modal/slice';
+import { channelActions, channelSelectors } from 'slices/channels';
+import { modalActions } from 'slices/modal';
 import Navigation from 'components/Navigation';
 
 const Sidebar = () => {
   const dispatch = useDispatch();
-  const channels = useSelector(getChannels);
+  const channels = useSelector(channelSelectors.getChannels);
 
   const handlePlusClick = () => dispatch(modalActions.show({ type: 'add' }));
   const handleChannelClick = (id) => dispatch(channelActions.setCurrentChannel(id));

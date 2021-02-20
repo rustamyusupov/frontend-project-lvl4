@@ -4,9 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Formik } from 'formik';
 
 import validate from 'utils/validate';
-import { createChannel, renameChannel, removeChannel } from 'modules/Channels/slice';
-import { modalActions } from 'modules/Modal/slice';
-import getCurrent from 'modules/Modal/selectors';
+import { channelThunks } from 'slices/channels';
+import { modalActions, modalSelectors } from 'slices/modal';
 import ActionForm from 'components/ActionForm';
 import Modal from 'components/Modal';
 
@@ -16,27 +15,27 @@ const map = {
     button: 'primary',
     input: true,
     title: 'Add channel',
-    onSubmit: createChannel,
+    onSubmit: channelThunks.create,
   },
   remove: {
     action: 'Confirm',
     button: 'danger',
     input: false,
     title: 'Remove channel',
-    onSubmit: removeChannel,
+    onSubmit: channelThunks.remove,
   },
   rename: {
     action: 'Submit',
     button: 'primary',
     input: true,
     title: 'Rename channel',
-    onSubmit: renameChannel,
+    onSubmit: channelThunks.rename,
   },
 };
 
 const Popup = ({ type }) => {
   const dispatch = useDispatch();
-  const modal = useSelector(getCurrent);
+  const modal = useSelector(modalSelectors.getCurrent);
   const inputEl = useRef(null);
 
   const show = modal.show && modal.type === type;
