@@ -1,9 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { messageActions } from 'slices/messages';
-import { channelActions, channelSelectors } from 'slices/channels';
+import { messageActions } from 'slices/messages/slice';
+import { channelActions } from 'slices/channels/slice';
+import { getCurrentChannel } from 'slices/channels/selectors';
 
-const create = createAsyncThunk(
+export const createChannel = createAsyncThunk(
   'channels/create',
   async ({ name }, { extra: { routes, request } }) => {
     const url = routes.channelsPath();
@@ -16,11 +17,11 @@ const create = createAsyncThunk(
   },
 );
 
-const remove = createAsyncThunk(
+export const removeChannel = createAsyncThunk(
   'channels/remove',
   async ({ id }, { dispatch, getState, extra: { routes, request } }) => {
     const state = getState();
-    const currentChannel = channelSelectors.getCurrentChannel(state);
+    const currentChannel = getCurrentChannel(state);
     const url = routes.channelPath(id);
     const options = {
       method: 'delete',
@@ -28,15 +29,15 @@ const remove = createAsyncThunk(
     };
 
     if (currentChannel.id === id) {
-      dispatch(channelActions.setCurrentChannel(1));
+      dispatch(channelActions.setCurrent(1));
     }
 
     await request(url, options);
-    dispatch(messageActions.removeMessages(id));
+    dispatch(messageActions.remove(id));
   },
 );
 
-const rename = createAsyncThunk(
+export const renameChannel = createAsyncThunk(
   'channels/rename',
   async ({ id, name }, { extra: { routes, request } }) => {
     const url = routes.channelPath(id);
@@ -48,5 +49,3 @@ const rename = createAsyncThunk(
     await request(url, options);
   },
 );
-
-export default { create, remove, rename };

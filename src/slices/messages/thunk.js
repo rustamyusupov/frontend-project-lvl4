@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-const create = createAsyncThunk(
+const createMessage = createAsyncThunk(
   'messages/create',
   async ({ channel, userName, text }, { extra: { routes, request } }) => {
     const url = routes.channelMessagesPath(channel);
@@ -13,4 +13,4 @@ const create = createAsyncThunk(
   },
 );
 
-export default { create };
+export default createMessage;

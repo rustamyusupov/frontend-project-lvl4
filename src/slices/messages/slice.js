@@ -9,10 +9,10 @@ const messages = createSlice({
     error: '',
   },
   reducers: {
-    addMessage: (state, action) => {
+    add: (state, action) => {
       state.items.push(action.payload.attributes);
     },
-    removeMessages: (state, action) => {
+    remove: (state, action) => {
       state.items = state.items.filter(
         ({ channelId }) => channelId !== action.payload,
       );
@@ -25,6 +25,6 @@ const messages = createSlice({
   },
 });
 
-export const { actions } = messages;
+export const messageActions = { ...messages.actions };
 
 export default messages.reducer;

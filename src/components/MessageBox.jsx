@@ -1,12 +1,12 @@
 import React, { useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
-import { messageSelectors } from 'slices/messages';
+import getMessages from 'slices/messages/selectors';
 import Chat from 'components/Chat';
 
 const MessageBox = () => {
   const tagRef = useRef(null);
-  const messages = useSelector(messageSelectors.getMessages);
+  const messages = useSelector(getMessages);
 
   const scrollToBottom = () => tagRef.current?.scrollIntoView();
 

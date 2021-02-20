@@ -2,8 +2,8 @@ import React, { useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik } from 'formik';
 
-import { channelSelectors } from 'slices/channels';
-import { messageThunks } from 'slices/messages';
+import { getCurrentChannel } from 'slices/channels/selectors';
+import createMessage from 'slices/messages/thunk';
 import { useUser } from 'context';
 import MessageForm from 'components/MessageForm';
 
@@ -13,7 +13,7 @@ const initialValues = {
 
 const InputForm = () => {
   const dispatch = useDispatch();
-  const { id } = useSelector(channelSelectors.getCurrentChannel);
+  const { id } = useSelector(getCurrentChannel);
   const inputEl = useRef(null);
   const userName = useUser();
 
@@ -26,7 +26,7 @@ const InputForm = () => {
     { setFieldError, resetForm, setSubmitting },
   ) => {
     const response = await dispatch(
-      messageThunks.createMessage({ channel: id, userName, text: message }),
+      createMessage({ channel: id, userName, text: message }),
     );
 
     setSubmitting(false);

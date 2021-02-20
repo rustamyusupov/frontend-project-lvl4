@@ -8,8 +8,8 @@ import io from 'socket.io-client';
 
 import '../assets/application.scss';
 import configureStore from 'redux/configureStore';
-import { channelActions } from 'slices/channels';
-import { messageActions } from 'slices/messages';
+import { channelActions } from 'slices/channels/slice';
+import { messageActions } from 'slices/messages/slice';
 import App from 'components/App';
 import { UserProvider } from './context';
 
@@ -20,7 +20,6 @@ const initialState = {
 const store = configureStore(initialState);
 const mountNode = document.getElementById('chat');
 const socket = io();
-const { addChannel, removeChannel, renameChannel } = channelActions;
 
 const render = () => {
   ReactDOM.render(
@@ -37,9 +36,9 @@ if (process.env.NODE_ENV !== 'production') {
   localStorage.debug = 'chat:*';
 }
 
-socket.on('newChannel', (data) => store.dispatch(addChannel(data)));
-socket.on('removeChannel', (data) => store.dispatch(removeChannel(data)));
-socket.on('renameChannel', (data) => store.dispatch(renameChannel(data)));
-socket.on('newMessage', (data) => store.dispatch(messageActions.addMessage(data)));
+socket.on('newChannel', (data) => store.dispatch(channelActions.add(data)));
+socket.on('removeChannel', (data) => store.dispatch(channelActions.remove(data)));
+socket.on('renameChannel', (data) => store.dispatch(channelActions.rename(data)));
+socket.on('newMessage', (data) => store.dispatch(messageActions.add(data)));
 
 render();
