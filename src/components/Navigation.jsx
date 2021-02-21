@@ -11,8 +11,9 @@ const renderButton = ({
   <Button
     type="button"
     variant={active ? 'primary' : 'light'}
-    className={`nav-link text-left btn-block shadow-none${removable ? ' flex-grow-1' : ' mb-2'
-      }`}
+    className={
+      `nav-link text-left btn-block shadow-none${removable ? ' flex-grow-1' : ' mb-2'}`
+    }
     onClick={onClick}
   >
     {name}
