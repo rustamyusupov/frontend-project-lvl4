@@ -1,11 +1,14 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 
+import { createChannel, removeChannel, renameChannel } from './thunk';
+
 const channels = createSlice({
   name: 'channels',
   initialState: {
     currentChannelId: 1,
     items: [],
+    error: '',
   },
   reducers: {
     setCurrent: (state, action) => {
@@ -23,6 +26,17 @@ const channels = createSlice({
     },
     remove: (state, action) => {
       state.items = state.items.filter(({ id }) => id !== action.payload.id);
+    },
+  },
+  extraReducers: {
+    [createChannel.rejected]: (state, action) => {
+      state.error = action.error.message;
+    },
+    [removeChannel.rejected]: (state, action) => {
+      state.error = action.error.message;
+    },
+    [renameChannel.rejected]: (state, action) => {
+      state.error = action.error.message;
     },
   },
 });

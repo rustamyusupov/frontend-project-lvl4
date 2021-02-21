@@ -1,7 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { messageActions } from 'slices/messages/slice';
-import { channelActions } from 'slices/channels/slice';
 import { currentChannelSelector } from 'slices/channels/selectors';
 
 export const createChannel = createAsyncThunk(
@@ -29,7 +28,7 @@ export const removeChannel = createAsyncThunk(
     };
 
     if (currentChannel.id === id) {
-      dispatch(channelActions.setCurrent(1));
+      dispatch({ type: 'channels/setCurrent', payload: 1 });
     }
 
     await request(url, options);
