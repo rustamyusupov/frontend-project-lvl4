@@ -12,6 +12,7 @@ import { channelActions } from 'slices/channels/slice';
 import { messageActions } from 'slices/messages/slice';
 import App from 'components/App';
 import { UserProvider } from './context';
+import './i18n';
 
 const initialState = {
   channels: { items: channels, currentChannelId },
