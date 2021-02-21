@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik } from 'formik';
 
-import { getCurrentChannel } from 'slices/channels/selectors';
+import { currentChannelSelector } from 'slices/channels/selectors';
 import createMessage from 'slices/messages/thunk';
 import { useUser } from 'context';
 import MessageForm from 'components/MessageForm';
@@ -13,7 +13,7 @@ const initialValues = {
 
 const InputForm = () => {
   const dispatch = useDispatch();
-  const { id } = useSelector(getCurrentChannel);
+  const { id } = useSelector(currentChannelSelector);
   const inputEl = useRef(null);
   const userName = useUser();
 

@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { messageActions } from 'slices/messages/slice';
 import { channelActions } from 'slices/channels/slice';
-import { getCurrentChannel } from 'slices/channels/selectors';
+import { currentChannelSelector } from 'slices/channels/selectors';
 
 export const createChannel = createAsyncThunk(
   'channels/create',
@@ -21,7 +21,7 @@ export const removeChannel = createAsyncThunk(
   'channels/remove',
   async ({ id }, { dispatch, getState, extra: { routes, request } }) => {
     const state = getState();
-    const currentChannel = getCurrentChannel(state);
+    const currentChannel = currentChannelSelector(state);
     const url = routes.channelPath(id);
     const options = {
       method: 'delete',

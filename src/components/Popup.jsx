@@ -6,7 +6,7 @@ import { Formik } from 'formik';
 import validate from 'utils/validate';
 import { createChannel, removeChannel, renameChannel } from 'slices/channels/thunk';
 import { modalActions } from 'slices/modal/slice';
-import getCurrent from 'slices/modal/selectors';
+import modalSelector from 'slices/modal/selectors';
 import ActionForm from 'components/ActionForm';
 import Modal from 'components/Modal';
 
@@ -36,7 +36,7 @@ const map = {
 
 const Popup = ({ type }) => {
   const dispatch = useDispatch();
-  const modal = useSelector(getCurrent);
+  const modal = useSelector(modalSelector);
   const inputEl = useRef(null);
 
   const show = modal.show && modal.type === type;
