@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 
-import Input from 'components/InputForm';
+import InputForm from 'components/InputForm';
 import MessageBox from 'components/MessageBox';
 import Popup from 'components/Popup';
 import Sidebar from 'components/Sidebar';
@@ -17,7 +17,7 @@ const App = () => (
           <MessageBox />
         </div>
         <div className="mt-auto">
-          <Input />
+          <InputForm />
         </div>
       </div>
     </Col>

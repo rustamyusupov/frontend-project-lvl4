@@ -1,0 +1,14 @@
+{
+  "channels": "Channels",
+  "remove": "Remove",
+  "rename": "Rename",
+  "submit": "Submit",
+  "Network Error": "Network error, check internet connection",
+  "addChannel": "Add channel",
+  "removeChannel": "Remove Channel",
+  "renameChannel": "Rename channel",
+  "confirm": "Confirm",
+  "cancel": "Cancel",
+  "required": "Required field",
+  "wrong length": "Must be 3 to 20 characters"
+}

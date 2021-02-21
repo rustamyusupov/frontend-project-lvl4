@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 
 import { channelActions } from 'slices/channels/slice';
 import { channelsSelector } from 'slices/channels/selectors';
@@ -10,6 +11,7 @@ import Navigation from 'components/Navigation';
 const Sidebar = () => {
   const dispatch = useDispatch();
   const channels = useSelector(channelsSelector);
+  const { t } = useTranslation();
 
   const handlePlusClick = () => dispatch(modalActions.show({ type: 'add' }));
   const handleChannelClick = (id) => dispatch(channelActions.setCurrent(id));
@@ -18,7 +20,7 @@ const Sidebar = () => {
   return (
     <>
       <div className="d-flex mb-2">
-        <span>Channels</span>
+        <span>{t('channels')}</span>
         <Button
           variant="link"
           className="ml-auto p-0"

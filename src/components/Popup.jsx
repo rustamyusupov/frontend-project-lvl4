@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik } from 'formik';
+import { useTranslation } from 'react-i18next';
 
 import validate from 'utils/validate';
 import { createChannel, removeChannel, renameChannel } from 'slices/channels/thunk';
@@ -12,24 +13,24 @@ import Modal from 'components/Modal';
 
 const map = {
   add: {
-    action: 'Submit',
+    action: 'submit',
     button: 'primary',
     input: true,
-    title: 'Add channel',
+    title: 'addChannel',
     onSubmit: createChannel,
   },
   remove: {
-    action: 'Confirm',
+    action: 'confirm',
     button: 'danger',
     input: false,
-    title: 'Remove channel',
+    title: 'removeChannel',
     onSubmit: removeChannel,
   },
   rename: {
-    action: 'Submit',
+    action: 'submit',
     button: 'primary',
     input: true,
-    title: 'Rename channel',
+    title: 'renameChannel',
     onSubmit: renameChannel,
   },
 };
@@ -38,6 +39,7 @@ const Popup = ({ type }) => {
   const dispatch = useDispatch();
   const modal = useSelector(modalSelector);
   const inputEl = useRef(null);
+  const { t } = useTranslation();
 
   const show = modal.show && modal.type === type;
   const {
@@ -55,7 +57,7 @@ const Popup = ({ type }) => {
     setSubmitting(false);
 
     if (response.error) {
-      setFieldError('name', response.error?.message, false);
+      setFieldError('name', t(response.error?.message), false);
     } else {
       dispatch(modalActions.hide());
     }
@@ -64,7 +66,7 @@ const Popup = ({ type }) => {
   return (
     <Modal
       show={show}
-      title={title}
+      title={t(title)}
       content={(
         <Formik
           initialValues={{ name: modal.data?.name ?? '' }}
@@ -73,9 +75,10 @@ const Popup = ({ type }) => {
         >
           {({ errors, isSubmitting, touched }) => (
             <ActionForm
-              action={action}
+              action={t(action)}
               button={button}
-              errors={errors}
+              cancel={t('cancel')}
+              error={t(errors?.name)}
               input={input}
               isSubmitting={isSubmitting}
               touched={touched}

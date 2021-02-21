@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik } from 'formik';
+import { useTranslation } from 'react-i18next';
 
 import { currentChannelSelector } from 'slices/channels/selectors';
 import createMessage from 'slices/messages/thunk';
@@ -16,6 +17,7 @@ const InputForm = () => {
   const { id } = useSelector(currentChannelSelector);
   const inputEl = useRef(null);
   const userName = useUser();
+  const { t } = useTranslation();
 
   useEffect(() => {
     inputEl.current?.focus();
@@ -32,7 +34,7 @@ const InputForm = () => {
     setSubmitting(false);
 
     if (response.error) {
-      setFieldError('message', response.error?.message, false);
+      setFieldError('message', t(response.error?.message), false);
       return;
     }
 

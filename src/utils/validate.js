@@ -2,11 +2,11 @@ const validate = (values) => {
   const errors = {};
 
   if (!values.name) {
-    errors.name = 'Required';
+    errors.name = 'required';
   }
 
-  if (values.name?.length < 3 || values.name?.length > 20) {
-    errors.name = 'Must be 3 to 20 characters';
+  if (values.name && (values.name.length < 3 || values.name.length > 20)) {
+    errors.name = 'wrong length';
   }
 
   return errors;

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {
   NavItem, Button, ButtonGroup, Dropdown,
 } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 
 const renderButton = ({
   active, name, removable, onClick,
@@ -10,9 +11,8 @@ const renderButton = ({
   <Button
     type="button"
     variant={active ? 'primary' : 'light'}
-    className={`nav-link text-left btn-block shadow-none${
-      removable ? ' flex-grow-1' : ' mb-2'
-    }`}
+    className={`nav-link text-left btn-block shadow-none${removable ? ' flex-grow-1' : ' mb-2'
+      }`}
     onClick={onClick}
   >
     {name}
@@ -28,8 +28,8 @@ const renderGroup = (props) => (
       split
     />
     <Dropdown.Menu>
-      <Dropdown.Item onClick={props.onRename}>Rename</Dropdown.Item>
-      <Dropdown.Item onClick={props.onRemove}>Remove</Dropdown.Item>
+      <Dropdown.Item onClick={props.onRename}>{props.t('rename')}</Dropdown.Item>
+      <Dropdown.Item onClick={props.onRemove}>{props.t('remove')}</Dropdown.Item>
     </Dropdown.Menu>
   </Dropdown>
 );
@@ -37,6 +37,8 @@ const renderGroup = (props) => (
 const Navigation = ({
   items, onClick, onRename, onRemove,
 }) => {
+  const { t } = useTranslation();
+
   const handleClick = (id) => () => onClick(id);
   const handleRename = (props) => () => onRename({ ...props });
   const handleRemove = (props) => () => onRemove({ ...props });
@@ -52,6 +54,7 @@ const Navigation = ({
           onClick: handleClick(id),
           onRename: handleRename({ id, name }),
           onRemove: handleRemove({ id, name }),
+          t,
           ...rest,
         };
 
@@ -81,9 +84,9 @@ Navigation.propTypes = {
 
 Navigation.defaultProps = {
   items: [],
-  onClick: () => {},
-  onRename: () => {},
-  onRemove: () => {},
+  onClick: () => { },
+  onRename: () => { },
+  onRemove: () => { },
 };
 
 export default Navigation;
