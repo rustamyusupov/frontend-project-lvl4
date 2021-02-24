@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Formik } from 'formik';
 import { useTranslation } from 'react-i18next';
 
-import validate from 'utils/validate';
+import channelValidationSchema from 'utils/validate';
 import { createChannel, removeChannel, renameChannel } from 'slices/channels/thunk';
 import { modalActions } from 'slices/modal/slice';
 import modalSelector from 'slices/modal/selectors';
@@ -70,7 +70,7 @@ const Popup = ({ type }) => {
       content={(
         <Formik
           initialValues={{ name: modal.data?.name ?? '' }}
-          validate={validate}
+          validationSchema={channelValidationSchema}
           onSubmit={handleSubmit}
         >
           {({ errors, isSubmitting, touched }) => (

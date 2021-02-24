@@ -1,20 +1,13 @@
-const validate = (values) => {
-  const errors = {};
-  const minNameLength = 3;
-  const maxNameLength = 20;
+import * as yup from 'yup';
 
-  if (!values.name) {
-    errors.name = 'required';
-  }
+const minNameLength = 3;
+const maxNameLength = 20;
 
-  if (
-    values.name
-    && (values.name.length < minNameLength || values.name.length > maxNameLength)
-  ) {
-    errors.name = 'wrong length';
-  }
+const channelValidationSchema = yup.object().shape({
+  name: yup.string()
+    .required()
+    .min(minNameLength, 'a minimum of 3 characters is required')
+    .max(maxNameLength, 'a maximum of 20 characters is possible'),
+});
 
-  return errors;
-};
-
-export default validate;
+export default channelValidationSchema;
