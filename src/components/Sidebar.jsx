@@ -13,9 +13,9 @@ const Sidebar = () => {
   const channels = useSelector(channelsSelector);
   const { t } = useTranslation();
 
-  const handlePlusClick = () => dispatch(modalActions.show({ type: 'add' }));
-  const handleChannelClick = (id) => dispatch(channelActions.setCurrent(id));
-  const handleShow = (type) => (data) => dispatch(modalActions.show({ type, data }));
+  const handlePlusClick = () => dispatch(modalActions.showModal({ type: 'add' }));
+  const handleChannelClick = (id) => dispatch(channelActions.setCurrentChannel(id));
+  const handleShow = (type) => (data) => dispatch(modalActions.showModal({ type, data }));
 
   return (
     <>

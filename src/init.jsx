@@ -38,10 +38,10 @@ const init = () => {
     localStorage.debug = 'chat:*';
   }
 
-  socket.on('newChannel', (data) => store.dispatch(channelActions.add(data)));
-  socket.on('removeChannel', (data) => store.dispatch(channelActions.remove(data)));
-  socket.on('renameChannel', (data) => store.dispatch(channelActions.rename(data)));
-  socket.on('newMessage', (data) => store.dispatch(messageActions.add(data)));
+  socket.on('newChannel', (data) => store.dispatch(channelActions.addChannel(data)));
+  socket.on('removeChannel', (data) => store.dispatch(channelActions.removeChannel(data)));
+  socket.on('renameChannel', (data) => store.dispatch(channelActions.renameChannel(data)));
+  socket.on('newMessage', (data) => store.dispatch(messageActions.addMessage(data)));
 
   render();
 };

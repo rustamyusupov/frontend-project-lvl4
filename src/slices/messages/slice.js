@@ -10,10 +10,10 @@ const messages = createSlice({
     error: null,
   },
   reducers: {
-    add: (state, action) => {
+    addMessage: (state, action) => {
       state.items.push(action.payload.attributes);
     },
-    remove: (state, action) => {
+    removeMessage: (state, action) => {
       state.items = state.items.filter(
         ({ channelId }) => channelId !== action.payload,
       );

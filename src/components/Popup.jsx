@@ -50,7 +50,7 @@ const Popup = ({ type }) => {
     inputEl.current?.focus();
   }, [show]);
 
-  const handleClose = () => dispatch(modalActions.hide());
+  const handleClose = () => dispatch(modalActions.hideModal());
   const handleSubmit = async ({ name }, { setFieldError, setSubmitting }) => {
     const response = await dispatch(onSubmit({ id: modal.data?.id, name }));
 
@@ -59,7 +59,7 @@ const Popup = ({ type }) => {
     if (response.error) {
       setFieldError('name', t(response.error?.message), false);
     } else {
-      dispatch(modalActions.hide());
+      dispatch(modalActions.hideModal());
     }
   };
 
