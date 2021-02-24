@@ -20,9 +20,8 @@ const UserContext = React.createContext();
 
 const UserProvider = ({ children }) => {
   const name = getUserName();
-  const value = name;
 
-  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
+  return <UserContext.Provider value={name}>{children}</UserContext.Provider>;
 };
 
 const useUser = () => {
