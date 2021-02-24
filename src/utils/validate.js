@@ -1,12 +1,17 @@
 const validate = (values) => {
   const errors = {};
+  const minNameLength = 3;
+  const maxNameLength = 20;
 
   if (!values.name) {
-    errors.name = 'required';
+    errors.name = "required";
   }
 
-  if (values.name && (values.name.length < 3 || values.name.length > 20)) {
-    errors.name = 'wrong length';
+  if (
+    values.name &&
+    (values.name.length < minNameLength || values.name.length > maxNameLength)
+  ) {
+    errors.name = "wrong length";
   }
 
   return errors;
