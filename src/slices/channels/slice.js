@@ -3,10 +3,12 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { createChannel, removeChannel, renameChannel } from './thunk';
 
+const initialChannel = 1;
+
 const channels = createSlice({
   name: 'channels',
   initialState: {
-    currentChannelId: 1,
+    currentChannelId: initialChannel,
     items: [],
     error: '',
   },
