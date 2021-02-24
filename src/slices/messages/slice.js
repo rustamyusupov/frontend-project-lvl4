@@ -6,8 +6,8 @@ import create from './thunk';
 const messages = createSlice({
   name: 'messages',
   initialState: {
-    items: [],
-    error: '',
+    items: null,
+    error: null,
   },
   reducers: {
     add: (state, action) => {
