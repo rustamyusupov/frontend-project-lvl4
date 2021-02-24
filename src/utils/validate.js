@@ -4,14 +4,14 @@ const validate = (values) => {
   const maxNameLength = 20;
 
   if (!values.name) {
-    errors.name = "required";
+    errors.name = 'required';
   }
 
   if (
-    values.name &&
-    (values.name.length < minNameLength || values.name.length > maxNameLength)
+    values.name
+    && (values.name.length < minNameLength || values.name.length > maxNameLength)
   ) {
-    errors.name = "wrong length";
+    errors.name = 'wrong length';
   }
 
   return errors;
