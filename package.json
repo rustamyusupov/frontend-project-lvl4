@@ -9,10 +9,10 @@
     "node": ">= 14"
   },
   "scripts": {
-    "start": "NODE_ENV=production node dist/bin/slack.js",
+    "start": "dist/bin/slack.js",
     "prebuild": "rimraf dist",
-    "build-server": "NODE_ENV=production babel server --out-dir dist --source-maps inline && cp -r server/views dist/views",
-    "build-app": "NODE_ENV=production npx webpack --mode production",
+    "build-server": "babel server --out-dir dist --source-maps inline && cp -r server/views dist/views",
+    "build-app": "npx webpack -p --env production",
     "build": "npm run build-app && npm run build-server",
     "postinstall": "npm run build",
     "test": "jest"
@@ -66,7 +66,8 @@
     "style-loader": "^2.0.0",
     "webpack": "^5.21.2",
     "webpack-cli": "^4.5.0",
-    "webpack-dev-server": "^3.11.2"
+    "webpack-dev-server": "^3.11.2",
+    "yup": "^0.32.9"
   },
   "devDependencies": {
     "@types/jest": "^26.0.15",
