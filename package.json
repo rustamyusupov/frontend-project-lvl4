@@ -12,7 +12,7 @@
     "start": "dist/bin/slack.js",
     "prebuild": "rimraf dist",
     "build-server": "babel server --out-dir dist --source-maps inline && cp -r server/views dist/views",
-    "build-app": "npx webpack -p --env production",
+    "build-app": "npx webpack --env production",
     "build": "npm run build-app && npm run build-server",
     "postinstall": "npm run build",
     "test": "jest"
