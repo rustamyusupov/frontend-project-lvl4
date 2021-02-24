@@ -27,6 +27,10 @@ const channels = createSlice({
       }));
     },
     remove: (state, action) => {
+      if (state.currentChannelId === action.payload.id) {
+        state.currentChannelId = initialChannel;
+      }
+
       state.items = state.items.filter(({ id }) => id !== action.payload.id);
     },
   },

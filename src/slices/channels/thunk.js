@@ -18,18 +18,12 @@ export const createChannel = createAsyncThunk(
 
 export const removeChannel = createAsyncThunk(
   'channels/remove',
-  async ({ id }, { dispatch, getState, extra: { routes, request } }) => {
-    const state = getState();
-    const currentChannel = currentChannelSelector(state);
+  async ({ id }, { dispatch, extra: { routes, request } }) => {
     const url = routes.channelPath(id);
     const options = {
       method: 'delete',
       params: { id },
     };
-
-    if (currentChannel.id === id) {
-      dispatch({ type: 'channels/setCurrent', payload: 1 });
-    }
 
     await request(url, options);
     dispatch(messageActions.remove(id));
