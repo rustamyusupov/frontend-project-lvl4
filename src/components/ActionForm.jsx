@@ -35,22 +35,21 @@ const map = {
 
 const ActionForm = ({ type }) => {
   const dispatch = useDispatch();
-  const modal = useSelector(modalSelector);
+  const { data } = useSelector(modalSelector);
   const inputEl = useRef(null);
   const { t } = useTranslation();
 
-  const show = modal.show && modal.type === type;
   const {
     action, button, title, onSubmit,
   } = map[type];
 
   useEffect(() => {
     inputEl.current?.focus();
-  }, [show]);
+  }, []);
 
   const handleClose = () => dispatch(modalActions.hideModal());
   const handleSubmit = async ({ name }, { setFieldError, setSubmitting }) => {
-    const response = await dispatch(onSubmit({ id: modal.data?.id, name }));
+    const response = await dispatch(onSubmit({ id: data?.id, name }));
 
     setSubmitting(false);
 
@@ -63,11 +62,10 @@ const ActionForm = ({ type }) => {
 
   return (
     <Modal
-      show={show}
       title={t(title)}
       content={(
         <Formik
-          initialValues={{ name: modal.data?.name ?? '' }}
+          initialValues={{ name: data?.name ?? '' }}
           validationSchema={channelValidationSchema}
           onSubmit={handleSubmit}
         >
