@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { inputValidationSchema } from 'utils/validate';
 import { currentChannelSelector } from 'slices/channels/selectors';
 import createMessage from 'slices/messages/thunk';
-import { useUser } from 'context';
+import { useUser } from 'userContext';
 import MessageForm from 'components/MessageForm';
 
 const initialValues = {

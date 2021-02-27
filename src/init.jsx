@@ -7,6 +7,8 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import { Provider } from 'react-redux';
 import io from 'socket.io-client';
+import cookie from 'js-cookie';
+import faker from 'faker';
 
 import '../assets/application.scss';
 import configureStore from 'redux/configureStore';
@@ -14,7 +16,7 @@ import { channelActions } from 'slices/channels/slice';
 import { messageActions } from 'slices/messages/slice';
 import App from 'components/App';
 import enTranslation from 'en.json';
-import { UserProvider } from './context';
+import { UserProvider } from './userContext';
 
 const init = () => {
   const resources = {
@@ -30,17 +32,6 @@ const init = () => {
   const mountNode = document.getElementById('chat');
   const socket = io();
 
-  const render = () => {
-    ReactDOM.render(
-      <Provider store={store}>
-        <UserProvider>
-          <App />
-        </UserProvider>
-      </Provider>,
-      mountNode,
-    );
-  };
-
   if (process.env.NODE_ENV !== 'production') {
     localStorage.debug = 'chat:*';
   }
@@ -54,12 +45,25 @@ const init = () => {
       lng: 'en',
     });
 
+  if (!cookie.get('username')) {
+    const userName = faker.internet.userName();
+
+    cookie.set('username', userName);
+  }
+
   socket.on('newChannel', (data) => store.dispatch(channelActions.addChannel(data)));
   socket.on('removeChannel', (data) => store.dispatch(channelActions.removeChannel(data)));
   socket.on('renameChannel', (data) => store.dispatch(channelActions.renameChannel(data)));
   socket.on('newMessage', (data) => store.dispatch(messageActions.addMessage(data)));
 
-  render();
+  ReactDOM.render(
+    <Provider store={store}>
+      <UserProvider>
+        <App />
+      </UserProvider>
+    </Provider>,
+    mountNode,
+  );
 };
 
 export default init;
