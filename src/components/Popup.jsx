@@ -1,35 +1,32 @@
 import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { Formik } from 'formik';
+import { Formik, Form as FormikForm, Field } from 'formik';
+import { Form, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
 import { channelValidationSchema } from 'utils/validate';
 import { createChannel, removeChannel, renameChannel } from 'slices/channels/thunk';
 import { modalActions } from 'slices/modal/slice';
 import modalSelector from 'slices/modal/selectors';
-import ActionForm from 'components/ActionForm';
 import Modal from 'components/Modal';
 
 const map = {
   add: {
     action: 'submit',
     button: 'primary',
-    input: true,
     title: 'addChannel',
     onSubmit: createChannel,
   },
   remove: {
     action: 'confirm',
     button: 'danger',
-    input: false,
     title: 'removeChannel',
     onSubmit: removeChannel,
   },
   rename: {
     action: 'submit',
     button: 'primary',
-    input: true,
     title: 'renameChannel',
     onSubmit: renameChannel,
   },
@@ -43,7 +40,7 @@ const Popup = ({ type }) => {
 
   const show = modal.show && modal.type === type;
   const {
-    action, button, input, title, onSubmit,
+    action, button, title, onSubmit,
   } = map[type];
 
   useEffect(() => {
@@ -76,17 +73,31 @@ const Popup = ({ type }) => {
           {({
             errors, dirty, isSubmitting, touched,
           }) => (
-            <ActionForm
-              action={t(action)}
-              button={button}
-              cancel={t('cancel')}
-              error={t(errors?.name)}
-              input={input}
-              isDisabled={(!dirty && type !== 'remove') || isSubmitting}
-              touched={touched}
-              ref={inputEl}
-              onClose={handleClose}
-            />
+            <FormikForm noValidate>
+              <Form.Group className="form-group">
+                <Field
+                  name="name"
+                  aria-label="name"
+                  className={
+                    `mb-2 form-control ${touched.name && errors.name ? 'is-invalid' : ''}`
+                  }
+                  disabled={action === 'confirm'}
+                  innerRef={inputEl}
+                  autoComplete="off"
+                />
+                <Form.Control.Feedback type="invalid" className="mb-2">
+                  {touched.name && t(errors.name)}
+                </Form.Control.Feedback>
+                <div className="d-flex justify-content-end">
+                  <Button className="mr-2" variant="secondary" onClick={handleClose}>
+                    {t('cancel')}
+                  </Button>
+                  <Button variant={button} type="submit" disabled={(!dirty && type !== 'remove') || isSubmitting}>
+                    {t(action)}
+                  </Button>
+                </div>
+              </Form.Group>
+            </FormikForm>
           )}
         </Formik>
       )}
