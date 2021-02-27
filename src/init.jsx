@@ -1,5 +1,3 @@
-import 'core-js/stable';
-import 'regenerator-runtime/runtime';
 import ReactDOM from 'react-dom';
 import React from 'react';
 import { channels, currentChannelId, messages } from 'gon';
@@ -31,10 +29,6 @@ const init = () => {
   const store = configureStore(initialState);
   const mountNode = document.getElementById('chat');
   const socket = io();
-
-  if (process.env.NODE_ENV !== 'production') {
-    localStorage.debug = 'chat:*';
-  }
 
   i18n
     .use(initReactI18next)
