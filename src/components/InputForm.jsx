@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Formik } from 'formik';
 import { useTranslation } from 'react-i18next';
 
+import { inputValidationSchema } from 'utils/validate';
 import { currentChannelSelector } from 'slices/channels/selectors';
 import createMessage from 'slices/messages/thunk';
 import { useUser } from 'context';
@@ -43,9 +44,13 @@ const InputForm = () => {
   };
 
   return (
-    <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={inputValidationSchema}
+      onSubmit={handleSubmit}
+    >
       {({ dirty, errors, isSubmitting }) => (
-        <MessageForm disabled={isSubmitting || !dirty} errors={errors} ref={inputEl} />
+        <MessageForm disabled={!dirty || isSubmitting} errors={errors} ref={inputEl} />
       )}
     </Formik>
   );
