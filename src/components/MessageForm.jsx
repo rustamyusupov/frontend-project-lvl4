@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form as FormikForm, Field } from 'formik';
 import { Form, InputGroup, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+import cn from 'classnames';
 
 import { inputValidationSchema } from 'utils/validate';
 import { currentChannelSelector } from 'slices/channels/selectors';
@@ -56,7 +57,7 @@ const MessageForm = () => {
               <Field
                 name="message"
                 aria-label="message"
-                className={`mr-2 form-control ${errors.messages ? 'is-invalid' : ''}`}
+                className={cn('mr-2', 'form-control', { 'is-invalid': errors.messages })}
                 innerRef={inputEl}
                 autoComplete="off"
               />

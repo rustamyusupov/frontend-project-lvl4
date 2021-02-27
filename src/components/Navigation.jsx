@@ -4,6 +4,7 @@ import {
   NavItem, Button, ButtonGroup, Dropdown,
 } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+import cn from 'classnames';
 
 const renderButton = ({
   active, name, removable, onClick,
@@ -12,7 +13,13 @@ const renderButton = ({
     type="button"
     variant={active ? 'primary' : 'light'}
     className={
-      `nav-link text-left btn-block shadow-none${removable ? ' flex-grow-1' : ' mb-2'}`
+      cn(
+        'nav-link',
+        'text-left',
+        'btn-block',
+        'shadow-none',
+        { 'flex-grow-1': removable, 'mb-2': !removable },
+      )
     }
     onClick={onClick}
   >

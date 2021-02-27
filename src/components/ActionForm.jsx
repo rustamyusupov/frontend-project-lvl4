@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form as FormikForm, Field } from 'formik';
 import { Form, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+import cn from 'classnames';
 
 import { channelValidationSchema } from 'utils/validate';
 import { createChannel, removeChannel, renameChannel } from 'slices/channels/thunk';
@@ -78,9 +79,7 @@ const ActionForm = ({ type }) => {
                 <Field
                   name="name"
                   aria-label="name"
-                  className={
-                    `mb-2 form-control ${touched.name && errors.name ? 'is-invalid' : ''}`
-                  }
+                  className={cn('mb-2', 'form-control', { 'is-invalid': touched.name && errors.name })}
                   disabled={action === 'confirm'}
                   innerRef={inputEl}
                   autoComplete="off"
