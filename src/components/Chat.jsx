@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import messagesSelector from 'slices/messages/selectors';
 
-const MessageBox = () => {
+const Chat = () => {
   const anchorRef = useRef(null);
   const messages = useSelector(messagesSelector);
 
@@ -20,4 +20,4 @@ const MessageBox = () => {
     )));
 };
 
-export default MessageBox;
+export default Chat;
