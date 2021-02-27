@@ -11,9 +11,9 @@ const MessageBox = () => {
   const scrollToBottom = () => tagRef.current?.scrollIntoView();
 
   useEffect(() => {
-    const id = setTimeout(() => scrollToBottom(), 0);
+    const timerId = setTimeout(() => scrollToBottom(), 0);
 
-    return () => clearTimeout(id);
+    return () => clearTimeout(timerId);
   });
 
   return (
