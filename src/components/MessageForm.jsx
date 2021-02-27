@@ -4,7 +4,7 @@ import { Form as FormikForm, Field } from 'formik';
 import { Form, InputGroup, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
-const MessageForm = React.forwardRef(({ disabled, errors }, ref) => {
+const MessageForm = React.forwardRef(({ disabled, error }, ref) => {
   const { t } = useTranslation();
 
   return (
@@ -14,7 +14,7 @@ const MessageForm = React.forwardRef(({ disabled, errors }, ref) => {
           <Field
             name="message"
             aria-label="message"
-            className={`mr-2 form-control ${errors.message ? 'is-invalid' : ''}`}
+            className={`mr-2 form-control ${error ? 'is-invalid' : ''}`}
             innerRef={ref}
             autoComplete="off"
           />
@@ -22,8 +22,7 @@ const MessageForm = React.forwardRef(({ disabled, errors }, ref) => {
             {t('submit')}
           </Button>
           <Form.Control.Feedback type="invalid">
-            {errors.message}
-&nbsp;
+            {error}
           </Form.Control.Feedback>
         </InputGroup>
       </Form.Group>
@@ -35,14 +34,12 @@ MessageForm.displayName = 'MessageForm';
 
 MessageForm.propTypes = {
   disabled: PropTypes.bool,
-  errors: PropTypes.shape({
-    message: PropTypes.string,
-  }),
+  error: PropTypes.string,
 };
 
 MessageForm.defaultProps = {
   disabled: false,
-  errors: {},
+  error: '',
 };
 
 export default MessageForm;

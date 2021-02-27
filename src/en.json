@@ -10,5 +10,6 @@
   "confirm": "Confirm",
   "cancel": "Cancel",
   "required": "Required field",
-  "wrong length": "Must be 3 to 20 characters"
+  "wrong length": "Must be 3 to 20 characters",
+  "minimum length": "Must be minimum of 1 character"
 }

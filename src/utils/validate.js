@@ -7,10 +7,10 @@ export const channelValidationSchema = yup.object().shape({
   name: yup.string()
     .required()
     .trim()
-    .min(minNameLength, 'a minimum of 3 characters is required')
-    .max(maxNameLength, 'a maximum of 20 characters is possible'),
+    .min(minNameLength, 'wrong length')
+    .max(maxNameLength, 'wrong length'),
 });
 
 export const inputValidationSchema = yup.object().shape({
-  message: yup.string().trim().min(1, 'a minimum of 1 characters is required'),
+  message: yup.string().trim().min(1, 'minimum length'),
 });

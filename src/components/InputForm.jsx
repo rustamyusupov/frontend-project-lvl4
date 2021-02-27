@@ -50,7 +50,7 @@ const InputForm = () => {
       onSubmit={handleSubmit}
     >
       {({ dirty, errors, isSubmitting }) => (
-        <MessageForm disabled={!dirty || isSubmitting} errors={errors} ref={inputEl} />
+        <MessageForm disabled={!dirty || isSubmitting} error={t(errors.message)} ref={inputEl} />
       )}
     </Formik>
   );
