@@ -32,7 +32,7 @@ const map = {
   },
 };
 
-const Popup = ({ type }) => {
+const ActionForm = ({ type }) => {
   const dispatch = useDispatch();
   const modal = useSelector(modalSelector);
   const inputEl = useRef(null);
@@ -106,8 +106,8 @@ const Popup = ({ type }) => {
   );
 };
 
-Popup.propTypes = {
+ActionForm.propTypes = {
   type: PropTypes.oneOf(['add', 'rename', 'remove']).isRequired,
 };
 
-export default Popup;
+export default ActionForm;

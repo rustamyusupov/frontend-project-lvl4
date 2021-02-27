@@ -1,9 +1,9 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 
-import InputForm from 'components/InputForm';
+import MessageForm from 'components/MessageForm';
 import Chat from 'components/Chat';
-import Popup from 'components/Popup';
+import ActionForm from 'components/ActionForm';
 import Sidebar from 'components/Sidebar';
 
 const App = () => (
@@ -17,13 +17,13 @@ const App = () => (
           <Chat />
         </div>
         <div className="mt-auto">
-          <InputForm />
+          <MessageForm />
         </div>
       </div>
     </Col>
-    <Popup type="add" />
-    <Popup type="rename" />
-    <Popup type="remove" />
+    <ActionForm type="add" />
+    <ActionForm type="rename" />
+    <ActionForm type="remove" />
   </Row>
 );
 

@@ -1,45 +1,77 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Form as FormikForm, Field } from 'formik';
+import React, { useRef, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Formik, Form as FormikForm, Field } from 'formik';
 import { Form, InputGroup, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
-const MessageForm = React.forwardRef(({ disabled, error }, ref) => {
-  const { t } = useTranslation();
+import { inputValidationSchema } from 'utils/validate';
+import { currentChannelSelector } from 'slices/channels/selectors';
+import createMessage from 'slices/messages/thunk';
+import { useUser } from 'userContext';
 
-  return (
-    <FormikForm noValidate>
-      <Form.Group>
-        <InputGroup>
-          <Field
-            name="message"
-            aria-label="message"
-            className={`mr-2 form-control ${error ? 'is-invalid' : ''}`}
-            innerRef={ref}
-            autoComplete="off"
-          />
-          <Button type="submit" disabled={disabled}>
-            {t('submit')}
-          </Button>
-          <Form.Control.Feedback type="invalid">
-            {error}
-          </Form.Control.Feedback>
-        </InputGroup>
-      </Form.Group>
-    </FormikForm>
-  );
-});
-
-MessageForm.displayName = 'MessageForm';
-
-MessageForm.propTypes = {
-  disabled: PropTypes.bool,
-  error: PropTypes.string,
+const initialValues = {
+  message: '',
 };
 
-MessageForm.defaultProps = {
-  disabled: false,
-  error: '',
+const MessageForm = () => {
+  const dispatch = useDispatch();
+  const { id } = useSelector(currentChannelSelector);
+  const inputEl = useRef(null);
+  const userName = useUser();
+  const { t } = useTranslation();
+
+  useEffect(() => {
+    inputEl.current?.focus();
+  }, [id]);
+
+  const handleSubmit = async (
+    { message },
+    { setFieldError, resetForm, setSubmitting },
+  ) => {
+    const response = await dispatch(
+      createMessage({ channel: id, userName, text: message }),
+    );
+
+    setSubmitting(false);
+
+    if (response.error) {
+      setFieldError('message', t(response.error?.message), false);
+      return;
+    }
+
+    resetForm();
+    inputEl.current?.focus();
+  };
+
+  return (
+    <Formik
+      initialValues={initialValues}
+      validationSchema={inputValidationSchema}
+      onSubmit={handleSubmit}
+    >
+      {({ dirty, errors, isSubmitting }) => (
+        <FormikForm noValidate>
+          <Form.Group>
+            <InputGroup>
+              <Field
+                name="message"
+                aria-label="message"
+                className={`mr-2 form-control ${errors.messages ? 'is-invalid' : ''}`}
+                innerRef={inputEl}
+                autoComplete="off"
+              />
+              <Button type="submit" disabled={!dirty || isSubmitting}>
+                {t('submit')}
+              </Button>
+              <Form.Control.Feedback type="invalid">
+                {t(errors.message)}
+              </Form.Control.Feedback>
+            </InputGroup>
+          </Form.Group>
+        </FormikForm>
+      )}
+    </Formik>
+  );
 };
 
 export default MessageForm;
