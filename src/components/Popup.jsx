@@ -73,14 +73,16 @@ const Popup = ({ type }) => {
           validationSchema={channelValidationSchema}
           onSubmit={handleSubmit}
         >
-          {({ errors, isSubmitting, touched }) => (
+          {({
+            errors, dirty, isSubmitting, touched,
+          }) => (
             <ActionForm
               action={t(action)}
               button={button}
               cancel={t('cancel')}
               error={t(errors?.name)}
               input={input}
-              isSubmitting={isSubmitting}
+              isDisabled={(!dirty && type !== 'remove') || isSubmitting}
               touched={touched}
               ref={inputEl}
               onClose={handleClose}

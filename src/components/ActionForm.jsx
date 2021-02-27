@@ -5,7 +5,7 @@ import { Form, Button } from 'react-bootstrap';
 
 const ActionForm = React.forwardRef(
   ({
-    action, button, cancel, error, input, isSubmitting, touched, onClose,
+    action, button, cancel, error, input, isDisabled, touched, onClose,
   }, ref) => (
     <FormikForm noValidate>
       <Form.Group className="form-group">
@@ -26,7 +26,7 @@ const ActionForm = React.forwardRef(
           <Button className="mr-2" variant="secondary" onClick={onClose}>
             {cancel}
           </Button>
-          <Button variant={button} type="submit" disabled={isSubmitting}>
+          <Button variant={button} type="submit" disabled={isDisabled}>
             {action}
           </Button>
         </div>
@@ -43,13 +43,13 @@ ActionForm.propTypes = {
   cancel: PropTypes.string.isRequired,
   error: PropTypes.string,
   input: PropTypes.bool.isRequired,
-  isSubmitting: PropTypes.bool,
+  isDisabled: PropTypes.bool,
   onClose: PropTypes.func,
 };
 
 ActionForm.defaultProps = {
   error: {},
-  isSubmitting: false,
+  isDisabled: false,
   onClose: () => { },
 };
 
