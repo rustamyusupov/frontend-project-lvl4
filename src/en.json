@@ -1,15 +1,15 @@
 {
-  "channels": "Channels",
-  "remove": "Remove",
-  "rename": "Rename",
-  "submit": "Submit",
-  "Network Error": "Network error, check internet connection",
   "addChannel": "Add channel",
-  "removeChannel": "Remove channel",
-  "renameChannel": "Rename channel",
-  "confirm": "Confirm",
   "cancel": "Cancel",
+  "channels": "Channels",
+  "confirm": "Confirm",
+  "minimum length": "Must be minimum of 1 character",
+  "Network Error": "Network error, check internet connection",
+  "remove": "Remove",
+  "removeChannel": "Remove channel",
+  "rename": "Rename",
+  "renameChannel": "Rename channel",
   "required": "Required field",
-  "wrong length": "Must be 3 to 20 characters",
-  "minimum length": "Must be minimum of 1 character"
+  "submit": "Submit",
+  "wrong length": "Must be 3 to 20 characters"
 }
