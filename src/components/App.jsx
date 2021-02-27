@@ -8,7 +8,7 @@ import Sidebar from 'components/Sidebar';
 
 const App = () => (
   <Row className="h-100 pb-3">
-    <Col xs="3" className="border-right" style={{ minWidth: '110px' }}>
+    <Col xs="3" className="border-right">
       <Sidebar />
     </Col>
     <Col className="h-100">
