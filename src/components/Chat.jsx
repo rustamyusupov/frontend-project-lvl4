@@ -1,28 +1,23 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useRef, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
-const Chat = ({ messages }) => messages.map(({ id, userName, text }) => (
-  <div key={id} className="text-break">
-    <b>{userName}</b>
-    :
-    {' '}
-    {text}
-  </div>
-));
+import messagesSelector from 'slices/messages/selectors';
 
-Chat.propTypes = {
-  messages: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      channelId: PropTypes.number,
-      userName: PropTypes.string,
-      text: PropTypes.string,
-    }),
-  ),
+const MessageBox = () => {
+  const anchorRef = useRef(null);
+  const messages = useSelector(messagesSelector);
+
+  useEffect(() => anchorRef.current?.scrollIntoView());
+
+  return (
+    messages.map(({ id, userName, text }, index) => (
+      <div key={id} className="text-break" ref={messages.length - 1 === index ? anchorRef : null}>
+        <b>{userName}</b>
+        :
+        {' '}
+        {text}
+      </div>
+    )));
 };
 
-Chat.defaultProps = {
-  messages: [],
-};
-
-export default Chat;
+export default MessageBox;
