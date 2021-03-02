@@ -50,8 +50,8 @@ const Navigation = ({
   const { t } = useTranslation();
 
   const handleClick = (id) => () => onClick(id);
-  const handleRename = (props) => () => onRename({ ...props });
-  const handleRemove = (props) => () => onRemove({ ...props });
+  const handleRename = (props) => () => onRename(props);
+  const handleRemove = (props) => () => onRemove(props);
 
   return (
     <ul className="nav flex-column nav-pills nav-fill">
