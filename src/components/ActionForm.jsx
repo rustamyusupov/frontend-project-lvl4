@@ -53,7 +53,7 @@ const ActionForm = ({ type }) => {
 
   const handleClose = () => dispatch(modalActions.hideModal());
   const handleSubmit = async ({ name }, { setFieldError, setSubmitting }) => {
-    const response = await dispatch(onSubmit({ id: data?.id, name }));
+    const response = await dispatch(onSubmit({ id: data?.id, name: name.trim() }));
 
     setSubmitting(false);
 
