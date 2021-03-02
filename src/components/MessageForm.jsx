@@ -36,7 +36,7 @@ const MessageForm = () => {
     setSubmitting(false);
 
     if (response.error) {
-      setFieldError('message', t(response.error?.message), false);
+      setFieldError('message', response.error?.message, false);
     } else {
       resetForm();
       inputEl.current?.focus();
@@ -64,7 +64,7 @@ const MessageForm = () => {
                 {t('submit')}
               </Button>
               <Form.Control.Feedback type="invalid">
-                {errors.message}
+                {t(errors.message)}
               </Form.Control.Feedback>
             </InputGroup>
           </Form.Group>
