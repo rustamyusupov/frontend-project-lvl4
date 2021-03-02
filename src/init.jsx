@@ -1,6 +1,5 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
-import { channels, currentChannelId, messages } from 'gon';
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import { Provider } from 'react-redux';
@@ -16,7 +15,7 @@ import App from 'components/App';
 import enTranslation from 'en.json';
 import { UserProvider } from './userContext';
 
-const init = () => {
+const init = ({ channels, currentChannelId, messages }) => {
   const resources = {
     en: {
       translation: enTranslation,
