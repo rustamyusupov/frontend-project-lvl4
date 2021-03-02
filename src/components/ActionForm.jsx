@@ -74,32 +74,36 @@ const ActionForm = ({ type }) => {
           onSubmit={handleSubmit}
         >
           {({
-            errors, dirty, isSubmitting, touched,
-          }) => (
-            <FormikForm noValidate>
-              <Form.Group className="form-group">
-                <Field
-                  name="name"
-                  aria-label="name"
-                  className={cn('mb-2', 'form-control', { 'is-invalid': touched.name && errors.name })}
-                  disabled={isRemove}
-                  innerRef={inputEl}
-                  autoComplete="off"
-                />
-                <Form.Control.Feedback type="invalid" className="mb-2">
-                  {touched.name && t(errors.name)}
-                </Form.Control.Feedback>
-                <div className="d-flex justify-content-end">
-                  <Button className="mr-2" variant="secondary" onClick={handleClose}>
-                    {t('cancel')}
-                  </Button>
-                  <Button variant={button} type="submit" disabled={(!dirty && !isRemove) || isSubmitting}>
-                    {t(action)}
-                  </Button>
-                </div>
-              </Form.Group>
-            </FormikForm>
-          )}
+            errors, dirty, isSubmitting, touched, isValid,
+          }) => {
+            const isSubmitDisabled = (!dirty && !isRemove) || !isValid || isSubmitting;
+
+            return (
+              <FormikForm noValidate>
+                <Form.Group className="form-group">
+                  <Field
+                    name="name"
+                    aria-label="name"
+                    className={cn('mb-2', 'form-control', { 'is-invalid': touched.name && errors.name })}
+                    disabled={isRemove}
+                    innerRef={inputEl}
+                    autoComplete="off"
+                  />
+                  <Form.Control.Feedback type="invalid" className="mb-2">
+                    {touched.name && t(errors.name)}
+                  </Form.Control.Feedback>
+                  <div className="d-flex justify-content-end">
+                    <Button className="mr-2" variant="secondary" onClick={handleClose}>
+                      {t('cancel')}
+                    </Button>
+                    <Button variant={button} type="submit" disabled={isSubmitDisabled}>
+                      {t(action)}
+                    </Button>
+                  </div>
+                </Form.Group>
+              </FormikForm>
+            );
+          }}
         </Formik>
       )}
       onClose={handleClose}
