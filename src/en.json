@@ -3,7 +3,7 @@
   "cancel": "Cancel",
   "channels": "Channels",
   "confirm": "Confirm",
-  "minimum length": "Must be minimum of 1 character",
+  "minimumLength": "Must be minimum of 1 character",
   "Network Error": "Network error, check internet connection",
   "remove": "Remove",
   "removeChannel": "Remove channel",
@@ -11,5 +11,5 @@
   "renameChannel": "Rename channel",
   "required": "Required field",
   "submit": "Submit",
-  "wrong length": "Must be 3 to 20 characters"
+  "wrongLength": "Must be 3 to 20 characters"
 }
