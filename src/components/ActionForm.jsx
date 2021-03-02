@@ -45,6 +45,7 @@ const ActionForm = ({ type }) => {
   const {
     action, button, title, isRemove, onSubmit,
   } = map[type];
+  const initialValues = { name: data?.name ?? '' };
 
   useEffect(() => {
     inputEl.current?.focus();
@@ -68,7 +69,7 @@ const ActionForm = ({ type }) => {
       title={t(title)}
       content={(
         <Formik
-          initialValues={{ name: data?.name ?? '' }}
+          initialValues={initialValues}
           validationSchema={channelValidationSchema}
           onSubmit={handleSubmit}
         >

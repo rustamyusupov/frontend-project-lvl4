@@ -37,11 +37,10 @@ const MessageForm = () => {
 
     if (response.error) {
       setFieldError('message', t(response.error?.message), false);
-      return;
+    } else {
+      resetForm();
+      inputEl.current?.focus();
     }
-
-    resetForm();
-    inputEl.current?.focus();
   };
 
   return (
@@ -57,7 +56,7 @@ const MessageForm = () => {
               <Field
                 name="message"
                 aria-label="message"
-                className={cn('mr-2', 'form-control', { 'is-invalid': errors.messages })}
+                className={cn('mr-2', 'form-control', { 'is-invalid': errors.message })}
                 innerRef={inputEl}
                 autoComplete="off"
               />
@@ -65,7 +64,7 @@ const MessageForm = () => {
                 {t('submit')}
               </Button>
               <Form.Control.Feedback type="invalid">
-                {t(errors.message)}
+                {errors.message}
               </Form.Control.Feedback>
             </InputGroup>
           </Form.Group>
