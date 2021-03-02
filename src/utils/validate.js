@@ -2,6 +2,7 @@ import * as yup from 'yup';
 
 const minNameLength = 3;
 const maxNameLength = 20;
+const minMessageLength = 1;
 
 export const channelValidationSchema = yup.object().shape({
   name: yup.string()
@@ -12,5 +13,5 @@ export const channelValidationSchema = yup.object().shape({
 });
 
 export const inputValidationSchema = yup.object().shape({
-  message: yup.string().trim().min(1, 'minimum length'),
+  message: yup.string().trim().min(minMessageLength, 'minimum length'),
 });
