@@ -17,18 +17,21 @@ const map = {
     action: 'submit',
     button: 'primary',
     title: 'addChannel',
+    isRemove: false,
     onSubmit: createChannel,
   },
   remove: {
     action: 'confirm',
     button: 'danger',
     title: 'removeChannel',
+    isRemove: true,
     onSubmit: removeChannel,
   },
   rename: {
     action: 'submit',
     button: 'primary',
     title: 'renameChannel',
+    isRemove: false,
     onSubmit: renameChannel,
   },
 };
@@ -40,7 +43,7 @@ const ActionForm = ({ type }) => {
   const { t } = useTranslation();
 
   const {
-    action, button, title, onSubmit,
+    action, button, title, isRemove, onSubmit,
   } = map[type];
 
   useEffect(() => {
@@ -78,7 +81,7 @@ const ActionForm = ({ type }) => {
                   name="name"
                   aria-label="name"
                   className={cn('mb-2', 'form-control', { 'is-invalid': touched.name && errors.name })}
-                  disabled={action === 'confirm'}
+                  disabled={isRemove}
                   innerRef={inputEl}
                   autoComplete="off"
                 />
@@ -89,7 +92,7 @@ const ActionForm = ({ type }) => {
                   <Button className="mr-2" variant="secondary" onClick={handleClose}>
                     {t('cancel')}
                   </Button>
-                  <Button variant={button} type="submit" disabled={(!dirty && type !== 'remove') || isSubmitting}>
+                  <Button variant={button} type="submit" disabled={(!dirty && !isRemove) || isSubmitting}>
                     {t(action)}
                   </Button>
                 </div>
