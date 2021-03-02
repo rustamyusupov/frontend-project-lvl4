@@ -74,9 +74,9 @@ const ActionForm = ({ type }) => {
           onSubmit={handleSubmit}
         >
           {({
-            errors, dirty, isSubmitting, touched, isValid,
+            errors, dirty, isSubmitting, touched,
           }) => {
-            const isSubmitDisabled = (!dirty && !isRemove) || !isValid || isSubmitting;
+            const isSubmitDisabled = (!dirty && !isRemove) || isSubmitting;
 
             return (
               <FormikForm noValidate>
