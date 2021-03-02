@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  NavItem, Button, ButtonGroup, Dropdown,
+  Nav, Button, ButtonGroup, Dropdown,
 } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
@@ -54,7 +54,7 @@ const Navigation = ({
   const handleRemove = (props) => () => onRemove(props);
 
   return (
-    <ul className="nav flex-column nav-pills nav-fill">
+    <Nav className="flex-column nav-pills nav-fill">
       {items.map(({
         id, name, removable, ...rest
       }) => {
@@ -69,12 +69,12 @@ const Navigation = ({
         };
 
         return (
-          <NavItem key={id}>
+          <Nav.Item key={id}>
             {removable ? renderGroup(props) : renderButton(props)}
-          </NavItem>
+          </Nav.Item>
         );
       })}
-    </ul>
+    </Nav>
   );
 };
 
