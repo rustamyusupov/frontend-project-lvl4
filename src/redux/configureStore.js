@@ -1,9 +1,7 @@
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 
 import routes from 'routes';
-
 import request from 'utils/request';
-
 import reducer from './reducers';
 
 const configureAppStore = (initialState = {}) => {
