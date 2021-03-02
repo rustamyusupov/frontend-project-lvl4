@@ -8,24 +8,26 @@ import cn from 'classnames';
 
 const renderButton = ({
   active, name, removable, onClick,
-}) => (
-  <Button
-    type="button"
-    variant={active ? 'primary' : 'light'}
-    className={
-      cn(
-        'nav-link',
-        'text-left',
-        'btn-block',
-        'shadow-none',
-        { 'flex-grow-1': removable, 'mb-2': !removable },
-      )
-    }
-    onClick={onClick}
-  >
-    {name}
-  </Button>
-);
+}) => {
+  const className = cn(
+    'nav-link',
+    'text-left',
+    'btn-block',
+    'shadow-none',
+    { 'flex-grow-1': removable, 'mb-2': !removable },
+  );
+
+  return (
+    <Button
+      type="button"
+      variant={active ? 'primary' : 'light'}
+      className={className}
+      onClick={onClick}
+    >
+      {name}
+    </Button>
+  );
+};
 
 const renderGroup = (props) => (
   <Dropdown as={ButtonGroup} className="btn-block mb-2">
