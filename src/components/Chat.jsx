@@ -7,7 +7,7 @@ const Chat = () => {
   const anchorRef = useRef(null);
   const messages = useSelector(messagesSelector);
 
-  useEffect(() => anchorRef.current?.scrollIntoView());
+  useEffect(() => anchorRef.current?.scrollIntoView(), [messages]);
 
   return (
     messages.map(({ id, userName, text }, index) => (
