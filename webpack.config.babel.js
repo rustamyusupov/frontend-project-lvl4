@@ -2,6 +2,7 @@
 
 import path from 'path';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import LodashWebpackPlugin from 'lodash-webpack-plugin';
 
 const mode = process.env.NODE_ENV || 'development';
 
@@ -24,13 +25,19 @@ module.exports = {
     publicPath: '/assets/',
     compress: true,
   },
-  plugins: [new MiniCssExtractPlugin()],
+  plugins: [new MiniCssExtractPlugin(), new LodashWebpackPlugin()],
   module: {
     rules: [
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: 'babel-loader',
+        use: {
+          loader: 'babel-loader',
+          options: {
+            plugins: ['lodash'],
+            presets: [['@babel/env', { targets: { node: 6 } }]],
+          },
+        },
       },
       {
         test: /\.s[ac]ss$/i,

@@ -1,3 +1,7 @@
 module.exports = {
-  presets: ['@babel/preset-env', '@babel/preset-react'],
+  plugins: ['lodash'],
+  presets: [
+    ['@babel/preset-env', { targets: { node: 6 } }],
+    '@babel/preset-react',
+  ],
 };
