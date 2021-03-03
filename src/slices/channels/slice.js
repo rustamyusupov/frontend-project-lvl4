@@ -35,7 +35,7 @@ const channels = createSlice({
   },
   extraReducers: {
     [createChannel.fulfilled]: (state, action) => {
-      state.currentChannelId = action.payload.id;
+      state.currentChannelId = action.payload?.id;
     },
     [createChannel.rejected]: (state, action) => {
       state.error = action.error.message;
