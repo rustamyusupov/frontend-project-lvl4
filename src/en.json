@@ -1,6 +1,7 @@
 {
   "addChannel": "Add channel",
   "cancel": "Cancel",
+  "channelExists": "The channel already exists",
   "channels": "Channels",
   "confirm": "Confirm",
   "minimumLength": "Must be minimum of 1 character",
