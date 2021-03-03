@@ -13,7 +13,7 @@ const Sidebar = () => {
   const channels = useSelector(channelsSelector);
   const { t } = useTranslation();
 
-  const handlePlusClick = () => dispatch(modalActions.showModal({ type: 'add' }));
+  const handlePlusClick = () => dispatch(modalActions.showModal({ type: 'addChannel' }));
   const handleChannelClick = (id) => dispatch(channelActions.setCurrentChannel(id));
   const handleShow = (type) => (data) => dispatch(modalActions.showModal({ type, data }));
 
@@ -32,8 +32,8 @@ const Sidebar = () => {
       <Navigation
         items={channels}
         onClick={handleChannelClick}
-        onRename={handleShow('rename')}
-        onRemove={handleShow('remove')}
+        onRename={handleShow('renameChannel')}
+        onRemove={handleShow('removeChannel')}
       />
     </>
   );
