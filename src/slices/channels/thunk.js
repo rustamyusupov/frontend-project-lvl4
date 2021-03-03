@@ -2,9 +2,18 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { messageActions } from 'slices/messages/slice';
 
+import { isChannelExistsSelector } from './selectors';
+
 export const createChannel = createAsyncThunk(
   'channels/create',
-  async ({ name }, { extra: { routes, request } }) => {
+  async ({ name }, { getState, extra: { routes, request } }) => {
+    const state = getState();
+    const isChannelExists = isChannelExistsSelector(state, name);
+
+    if (isChannelExists) {
+      throw new Error('channelExists');
+    }
+
     const url = routes.channelsPath();
     const options = {
       method: 'post',
