@@ -85,7 +85,7 @@ const ActionForm = ({ type }) => {
                     name="name"
                     aria-label="name"
                     className={cn('mb-2', 'form-control', { 'is-invalid': touched.name && errors.name })}
-                    disabled={isRemove}
+                    disabled={isRemove || isSubmitting}
                     innerRef={inputEl}
                     autoComplete="off"
                   />
