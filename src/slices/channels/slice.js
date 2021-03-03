@@ -18,6 +18,7 @@ const channels = createSlice({
     },
     addChannel: (state, action) => {
       state.items.push(action.payload.attributes);
+      state.currentChannelId = action.payload.id;
     },
     renameChannel: (state, action) => {
       const { id, attributes: { name } } = action.payload;
@@ -34,9 +35,6 @@ const channels = createSlice({
     },
   },
   extraReducers: {
-    [createChannel.fulfilled]: (state, action) => {
-      state.currentChannelId = action.payload?.id;
-    },
     [createChannel.rejected]: (state, action) => {
       state.error = action.error.message;
     },
