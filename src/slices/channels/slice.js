@@ -20,11 +20,10 @@ const channels = createSlice({
       state.items.push(action.payload.attributes);
     },
     renameChannel: (state, action) => {
-      state.items = state.items.map(({ id, name, ...rest }) => ({
-        name: id === action.payload.id ? action.payload.attributes.name : name,
-        id,
-        ...rest,
-      }));
+      const { id, attributes: { name } } = action.payload;
+      const channel = state.items.find((item) => item.id === id);
+
+      channel.name = name;
     },
     removeChannel: (state, action) => {
       if (state.currentChannelId === action.payload.id) {
