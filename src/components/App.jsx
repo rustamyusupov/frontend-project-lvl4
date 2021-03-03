@@ -3,13 +3,23 @@ import { Row, Col } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 import modalSelector from 'slices/modal/selectors';
-import MessageForm from 'components/MessageForm';
+import AddForm from 'components/AddForm';
 import Chat from 'components/Chat';
-import ActionForm from 'components/ActionForm';
+import MessageForm from 'components/MessageForm';
+import RemoveForm from 'components/RemoveForm';
+import RenameForm from 'components/RenameForm';
+
 import Sidebar from 'components/Sidebar';
+
+const formMap = {
+  add: AddForm,
+  remove: RemoveForm,
+  rename: RenameForm,
+};
 
 const App = () => {
   const { show, type } = useSelector(modalSelector);
+  const Form = formMap[type];
 
   return (
     <Row className="h-100 pb-3">
@@ -26,7 +36,7 @@ const App = () => {
           </div>
         </div>
       </Col>
-      {show && <ActionForm type={type} />}
+      {show && <Form />}
     </Row>
   );
 };
