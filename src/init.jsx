@@ -15,7 +15,7 @@ import App from 'components/App';
 import enTranslation from 'en.json';
 import { UserProvider } from './userContext';
 
-const init = ({ channels, currentChannelId, messages }) => {
+const init = async ({ channels, currentChannelId, messages }) => {
   const resources = {
     en: {
       translation: enTranslation,
@@ -25,11 +25,12 @@ const init = ({ channels, currentChannelId, messages }) => {
     channels: { items: channels, currentChannelId },
     messages: { items: messages },
   };
+  const i18Instance = i18n.createInstance();
   const store = configureStore(initialState);
   const mountNode = document.getElementById('chat');
   const socket = io();
 
-  i18n
+  await i18Instance
     .use(initReactI18next)
     .init({
       resources,
