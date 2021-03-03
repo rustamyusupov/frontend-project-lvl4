@@ -42,7 +42,14 @@ export const removeChannel = createAsyncThunk(
 
 export const renameChannel = createAsyncThunk(
   'channels/rename',
-  async ({ id, name }, { extra: { routes, request } }) => {
+  async ({ id, name }, { getState, extra: { routes, request } }) => {
+    const state = getState();
+    const isChannelExists = isChannelExistsSelector(state, name);
+
+    if (isChannelExists) {
+      throw new Error('channelExists');
+    }
+
     const url = routes.channelPath(id);
     const options = {
       method: 'patch',
