@@ -21,7 +21,7 @@ const MessageForm = () => {
   const userName = useUser();
   const { t } = useTranslation();
 
-  useEffect(() => inputEl.current?.focus());
+  useEffect(() => { inputEl.current?.focus(); });
 
   const handleSubmit = async (
     { message },

@@ -13,7 +13,7 @@ const AddForm = ({ onCancel, onSubmit }) => {
 
   const initialValues = { name: '' };
 
-  useEffect(() => inputEl.current?.focus());
+  useEffect(() => { inputEl.current?.focus(); });
 
   const handleSubmit = async ({ name }, { setFieldError, setSubmitting }) => {
     const response = await onSubmit({ name: name.trim() });

@@ -15,7 +15,7 @@ const RenameForm = ({
 
   const initialValues = { name };
 
-  useEffect(() => inputEl.current?.focus());
+  useEffect(() => { inputEl.current?.focus(); });
 
   const handleSubmit = async ({ name: newName }, { setFieldError, setSubmitting }) => {
     const response = await onSubmit({ id, name: newName.trim() });
