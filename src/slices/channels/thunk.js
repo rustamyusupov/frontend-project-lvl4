@@ -20,9 +20,7 @@ export const createChannel = createAsyncThunk(
       data: { attributes: { name } },
     };
 
-    const response = await request(url, options);
-
-    return response;
+    await request(url, options);
   },
 );
 
