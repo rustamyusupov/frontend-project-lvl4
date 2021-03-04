@@ -17,8 +17,8 @@ const channels = createSlice({
       state.currentChannelId = action.payload;
     },
     addChannel: (state, action) => {
+      state.currentChannelId = action.payload?.id;
       state.items.push(action.payload.attributes);
-      state.currentChannelId = action.payload.id;
     },
     renameChannel: (state, action) => {
       const { id, attributes: { name } } = action.payload;

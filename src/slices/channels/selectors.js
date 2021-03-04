@@ -16,5 +16,5 @@ export const currentChannelSelector = createSelector(
 export const channelsSelector = createSelector(
   get('channels.items'),
   currentChannelSelector,
-  (items, current) => items.map(({ id, ...rest }) => ({ id, active: id === current.id, ...rest })),
+  (items, current) => items.map(({ id, ...rest }) => ({ id, active: id === current?.id, ...rest })),
 );
